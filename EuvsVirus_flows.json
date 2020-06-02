@@ -1,0 +1,676 @@
+[
+    {
+        "id": "c3338301.aaa24",
+        "type": "subflow",
+        "name": "DB",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 180,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "ef6b539c.9b7b6"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "ef6b539c.9b7b6",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
+        "id": "ef6b539c.9b7b6",
+        "type": "sqlite",
+        "z": "c3338301.aaa24",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 370,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8713b1a6.c3ea6",
+        "type": "sqlitedb",
+        "z": "",
+        "db": "/home/labuser/euvsvirus",
+        "mode": "RWC"
+    },
+    {
+        "id": "488f98b4.ed0e28",
+        "type": "subflow",
+        "name": "ReverseGeoFromID",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 180,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "fe1b405.ccc9fc"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 940,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "cda57770.697e98",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
+        "id": "fe1b405.ccc9fc",
+        "type": "function",
+        "z": "488f98b4.ed0e28",
+        "name": "get location from entity id",
+        "func": "\n//info in msg.payload.entityID\n\nmsg.info=msg.payload;\n\nmsg.topic='select name,email,contact_info,lat,lon from entities where entityID='+msg.payload.entityID; \n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "47cea5f0.50df8c"
+            ]
+        ]
+    },
+    {
+        "id": "7e273d55.af9564",
+        "type": "google geocoding",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "geocodeBy": "coordinates",
+        "address": "",
+        "lat": "",
+        "lon": "",
+        "googleAPI": "",
+        "bounds": "",
+        "language": "",
+        "region": "",
+        "components": "",
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "cda57770.697e98",
+                "4281baee.baf174"
+            ]
+        ]
+    },
+    {
+        "id": "47cea5f0.50df8c",
+        "type": "subflow:c3338301.aaa24",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "b3b0e05b.c5499"
+            ]
+        ]
+    },
+    {
+        "id": "b3b0e05b.c5499",
+        "type": "function",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "func": "\nmsg.location={};\nmsg.location.lat=msg.payload[0].lat;\nmsg.location.lon=msg.payload[0].lon;\n\n\nmsg.name=msg.payload[0].name;\nmsg.contact_info=msg.payload[0].contact_info;\nmsg.email=msg.payload[0].email;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 120,
+        "wires": [
+            [
+                "7e273d55.af9564"
+            ]
+        ]
+    },
+    {
+        "id": "cda57770.697e98",
+        "type": "function",
+        "z": "488f98b4.ed0e28",
+        "name": "extract city country",
+        "func": "var i=0;\nfor (i=0;i<msg.data.results[0].address_components.length;i++) {\n    if ((msg.data.results[0].address_components[i].types[0]===\"administrative_area_level_2\")){\n        msg.city=msg.data.results[0].address_components[i].short_name;\n        //console.log(\"FOUND CITY:\"+msg.city);\n    }\n    if ((msg.data.results[0].address_components[i].types[0]===\"country\")){\n        msg.country=msg.data.results[0].address_components[i].short_name;\n        //console.log(\"FOUND CITY:\"+msg.city);\n    }\n    //console.log(\"external loop:\"+i);\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 790,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4281baee.baf174",
+        "type": "debug",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 670,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "82736b0e.73c378",
+        "type": "tab",
+        "label": "Messaging",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "62282989.aeaab8",
+        "type": "link in",
+        "z": "82736b0e.73c378",
+        "name": "PUBLISHTOEXCHANGE",
+        "links": [
+            "58a83591.ba72fc"
+        ],
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "b057969a.4143e8"
+            ]
+        ]
+    },
+    {
+        "id": "64622c58.87f724",
+        "type": "amqp out",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "routingkey": "",
+        "iotype": "3",
+        "ioname": "amq.topic",
+        "server": "d9b7ef9f.d8ba",
+        "x": 980,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "99751125.6330c",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "adapt metadata",
+        "func": "\n//create filter in msg.topic\n//Country.City.ResourceCategory.ResourceType.Needed\nmsg.topic=msg.country+'.'+msg.city+'.'+msg.initialmsg.materialCategory+'.'+msg.initialmsg.materialSpecific+'.'+msg.initialmsg.needed;\n\nmsg.payload=msg.initialmsg;\nmsg.payload.city=msg.city;\nmsg.payload.country=msg.country;\nmsg.payload.name=msg.name;\nmsg.payload.contact_info=msg.contact_info;\nmsg.payload.email=msg.email;\n\ndelete msg.payload.token;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 120,
+        "wires": [
+            [
+                "64622c58.87f724",
+                "1c37c9ea.cf46f6"
+            ]
+        ]
+    },
+    {
+        "id": "534e7d41.604f44",
+        "type": "comment",
+        "z": "82736b0e.73c378",
+        "name": "LINK from SUBMIT FOR PUBLISH",
+        "info": "\"{\nuserID:<userID\nmaterialCategory:<materialCategory>\nmaterialSpecific:<materialSpecific>\nquantity:<quantity>\nneeded:<true/false>\n}\"",
+        "x": 200,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "2d3dab67.a002e4",
+        "type": "comment",
+        "z": "82736b0e.73c378",
+        "name": "LINK from Register- Create queue ",
+        "info": "msg.payload.ID\n\nmsg.info.email",
+        "x": 200,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "f54cda23.f45668",
+        "type": "link in",
+        "z": "82736b0e.73c378",
+        "name": "CREATEQUEUE",
+        "links": [
+            "7f19bb77.bb5844"
+        ],
+        "x": 200,
+        "y": 540,
+        "wires": [
+            [
+                "dea36ee7.f2c44",
+                "38c41076.4b1a8"
+            ]
+        ]
+    },
+    {
+        "id": "cefdca30.b80aa8",
+        "type": "comment",
+        "z": "82736b0e.73c378",
+        "name": "LINK for BINDING",
+        "info": "entityID\n\n\"{\nuserID:<userID\nmaterialCategory:<materialCategory>\nmaterialSpecific:<materialSpecific>\nquantity:<quantity>\nneeded:<true/false>\nradius: <radius>\n}\"\n\nneed also country and city which can be obtained\nfrom reverse geodocing subflow based on ID",
+        "x": 150,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f9d89077.6f481",
+        "type": "http request",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 810,
+        "y": 540,
+        "wires": [
+            [
+                "4d03ae9c.63f3e"
+            ]
+        ]
+    },
+    {
+        "id": "87d078dd.c6c508",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "CREATE QUEUE",
+        "func": "\nmsg.url=msg.baseurl+'queues/resourcefinder/'+msg.entityID+'_queue';\nmsg.payload={};\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 540,
+        "wires": [
+            [
+                "f9d89077.6f481"
+            ]
+        ]
+    },
+    {
+        "id": "4d03ae9c.63f3e",
+        "type": "debug",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 990,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "38c41076.4b1a8",
+        "type": "debug",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 290,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "5d1ce81c.b43ab8",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "add permissions",
+        "func": "\nmsg.headers={};\n\n//write in amq.topic\n//read in own queue\nmsg.payload={};\nmsg.url=msg.baseurl+\"permissions/resourcefinder/\"+msg.entityID;\nmsg.payload.configure=\"\";\nmsg.payload.write=\"amq.topic\";\nmsg.payload.read=msg.entityID+\"_queue\";\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 760,
+        "wires": [
+            [
+                "9933ba92.9d3be8"
+            ]
+        ]
+    },
+    {
+        "id": "9933ba92.9d3be8",
+        "type": "http request",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 950,
+        "y": 760,
+        "wires": [
+            [
+                "90485d12.62ba1"
+            ]
+        ]
+    },
+    {
+        "id": "90485d12.62ba1",
+        "type": "debug",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1130,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "ce577224.6d49c",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "Create user account for userID",
+        "func": "\nmsg.url={};\nmsg.payload={};\nmsg.method='PUT';\nmsg.headers={};\n\nmsg.url=msg.baseurl+\"users/\"+msg.entityID;\n\n\tvar text = \"\";\n\tvar possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\n    var length=12;\n\t//if (nonAlpha) {\n\t\tpossible += '_+-!@#$%^*()/*`~={}|][;:,./?';\n\t//}\n \n\tfor (var i = 0; i < length; i++) {\n\t\ttext += possible.charAt(Math.floor(Math.random() * possible.length));\n\t}\nmsg.payload.password=text;\n\nmsg.payload.tags=\"\";\n\nmsg.password=msg.payload.password;\n//msg.type=typeof msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 620,
+        "wires": [
+            [
+                "2f1653e5.e2b6ac"
+            ]
+        ]
+    },
+    {
+        "id": "2f1653e5.e2b6ac",
+        "type": "http request",
+        "z": "82736b0e.73c378",
+        "name": "Create user acount for userID",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 870,
+        "y": 620,
+        "wires": [
+            [
+                "2debf79a.2761e8"
+            ]
+        ]
+    },
+    {
+        "id": "2debf79a.2761e8",
+        "type": "switch",
+        "z": "82736b0e.73c378",
+        "name": "Check if creation success",
+        "property": "statusCode",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "199",
+                "v2": "299"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 1,
+        "x": 1150,
+        "y": 620,
+        "wires": [
+            [
+                "f980d9f7.017918",
+                "5d1ce81c.b43ab8"
+            ]
+        ]
+    },
+    {
+        "id": "f980d9f7.017918",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "Prepare email",
+        "func": "var mailtext=\"Your automatically generated user name for the messaging system is:   \"+msg.entityID+\"\\n and your generated password is:     \"+msg.password+\"\\n Don't forget to change it as soon as possible!\";\nmsg.topic=\"Your account credentials for the Pub/Sub system\";\nmsg.payload=mailtext;\nmsg.to=msg.info.email;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1260,
+        "y": 560,
+        "wires": [
+            [
+                "f2861c4d.e82a3",
+                "f59a0f55.102bb"
+            ]
+        ]
+    },
+    {
+        "id": "f2861c4d.e82a3",
+        "type": "e-mail",
+        "z": "82736b0e.73c378",
+        "server": "smtp.mail.yahoo.com",
+        "port": "465",
+        "secure": false,
+        "tls": false,
+        "name": "",
+        "dname": "Send email",
+        "x": 1310,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "dea36ee7.f2c44",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "add base url",
+        "func": "msg.baseurl='http://localhost:15672/api/';\n\nmsg.entityID=msg.payload.ID;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 620,
+        "wires": [
+            [
+                "87d078dd.c6c508",
+                "ce577224.6d49c"
+            ]
+        ]
+    },
+    {
+        "id": "f59a0f55.102bb",
+        "type": "debug",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1410,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "42514bd4.78d2f4",
+        "type": "subflow:488f98b4.ed0e28",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "env": [],
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "e3bcfd07.f634b",
+                "99751125.6330c"
+            ]
+        ]
+    },
+    {
+        "id": "1f0f1a9.70619e5",
+        "type": "inject",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 420,
+        "y": 20,
+        "wires": [
+            [
+                "85f28eba.0998b"
+            ]
+        ]
+    },
+    {
+        "id": "e3bcfd07.f634b",
+        "type": "debug",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 530,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "85f28eba.0998b",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "move ID",
+        "func": "msg.payload={};\n\nmsg.payload.entityID=110;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 480,
+        "y": 60,
+        "wires": [
+            [
+                "42514bd4.78d2f4"
+            ]
+        ]
+    },
+    {
+        "id": "b057969a.4143e8",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "func": "\nmsg.payload.entityID=msg.payload.userID;\n\nmsg.initialmsg=msg.payload;\n/*\nmsg.category=msg.payload.materialCategory;\nmsg.type=msg.payload.materialSpecific;\nmsg.entityID=msg.payload.entityID;\nmsg.needed=msg.payload.needed;\n*/\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "42514bd4.78d2f4"
+            ]
+        ]
+    },
+    {
+        "id": "1c37c9ea.cf46f6",
+        "type": "function",
+        "z": "82736b0e.73c378",
+        "name": "bind queue to exchange",
+        "func": "//bind exchange to queue\n//bindings/vhost/e/exchange/q/queue\n//e is the key character, exchange is the name of the exchange, similar for queue\nmsg.headers={};\nmsg.payload={};\nmsg.baseurl='http://localhost:15672/api/';\nmsg.url=msg.baseurl+\"bindings/resourcefinder/e/amq.topic\"+\"/q/\"+msg.initialmsg.entityID+\"_queue\";\n\nvar key=msg.country+'.'+msg.city+'.'+msg.initialmsg.materialCategory+'.'+msg.initialmsg.materialSpecific+'.';\nif (msg.initialmsg.needed===\"false\"){\n    key=key+\"true\";\n} else {\n    key=key+\"false\";\n}\n\nmsg.payload={\"routing_key\":key};\nmsg.method='POST';\n//node.send(msg);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "afe57bb7.a76c68"
+            ]
+        ]
+    },
+    {
+        "id": "afe57bb7.a76c68",
+        "type": "http request",
+        "z": "82736b0e.73c378",
+        "name": "Bind queue",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 830,
+        "y": 340,
+        "wires": [
+            [
+                "8c79bce9.cee3a"
+            ]
+        ]
+    },
+    {
+        "id": "8c79bce9.cee3a",
+        "type": "debug",
+        "z": "82736b0e.73c378",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1030,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ee0ea3e0.30dd3",
+        "type": "comment",
+        "z": "82736b0e.73c378",
+        "name": "NEED TO CHECK IF EXISTS BEFORE CREATING NEW",
+        "info": "",
+        "x": 1150,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d9b7ef9f.d8ba",
+        "type": "amqp-server",
+        "z": "",
+        "host": "localhost",
+        "port": "5672",
+        "vhost": "resourcefinder",
+        "keepalive": "30",
+        "usetls": false,
+        "verifyservercert": true,
+        "useca": false,
+        "ca": "",
+        "usetopology": false,
+        "topology": "{\n\t\"exchanges\": [\n\t\t{\"name\": \"exchange1\", \"type\": \"direct\", \"options\": {\"durable\": false}},\n\t\t{\"name\": \"exchange2\"}\n\t],\n\t\"queues\": [\n\t\t{\"name\": \"queue1\", \"options\": {\"messageTtl\": 60000}},\n\t\t{\"name\": \"queue2\"}\n\t],\n\t\"bindings\": [\n\t\t{\"source\": \"exchange1\", \"queue\": \"queue1\", \"pattern\": \"debug\", \"args\": {}},\n\t\t{\"source\": \"exchange1\", \"exchange\": \"exchange2\", \"pattern\": \"error\"},\n\t\t{\"source\": \"exchange2\", \"queue\": \"queue2\"}\n\t]\n}"
+    }
+]
