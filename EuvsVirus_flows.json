@@ -1,5 +1,75 @@
 [
     {
+        "id": "31802373.cd690c",
+        "type": "tab",
+        "label": "UI Register",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "dc4cb0ee.881d9",
+        "type": "tab",
+        "label": "UI Submit",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "824f57fd.e52648",
+        "type": "tab",
+        "label": "REST API",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "73394179.dad4d",
+        "type": "tab",
+        "label": "Accept transaction",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b20c5ac9.6e0c78",
+        "type": "tab",
+        "label": "Find Match",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "2d4e6750.e69178",
+        "type": "tab",
+        "label": "UI Scoreboard",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "82736b0e.73c378",
+        "type": "tab",
+        "label": "Messaging",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "77965529.2e46dc",
+        "type": "tab",
+        "label": "DB",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7110272b.243dd8",
+        "type": "tab",
+        "label": "UI Analytics",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "90a7ac04.b4395",
+        "type": "tab",
+        "label": "Map population",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "c3338301.aaa24",
         "type": "subflow",
         "name": "DB",
@@ -31,25 +101,55 @@
         "env": []
     },
     {
-        "id": "ef6b539c.9b7b6",
-        "type": "sqlite",
-        "z": "c3338301.aaa24",
-        "mydb": "8713b1a6.c3ea6",
-        "sqlquery": "msg.topic",
-        "sql": "",
-        "name": "",
-        "x": 370,
-        "y": 160,
-        "wires": [
-            []
-        ]
+        "id": "f02b58bd.b1cbd8",
+        "type": "subflow",
+        "name": "JWT Verification",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 240,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "ad36f65.445ec08"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 940,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "a1600786.96d348",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": []
     },
     {
-        "id": "8713b1a6.c3ea6",
-        "type": "sqlitedb",
-        "z": "",
-        "db": "/home/labuser/euvsvirus",
-        "mode": "RWC"
+        "id": "bf3352cf.16016",
+        "type": "subflow",
+        "name": "400 error - Bad request",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 140,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "52da0045.63ce4"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": []
     },
     {
         "id": "488f98b4.ed0e28",
@@ -83,91 +183,1374 @@
         "env": []
     },
     {
-        "id": "fe1b405.ccc9fc",
-        "type": "function",
-        "z": "488f98b4.ed0e28",
-        "name": "get location from entity id",
-        "func": "\n//info in msg.payload.entityID\n\nmsg.info=msg.payload;\n\nmsg.topic='select name,email,contact_info,lat,lon from entities where entityID='+msg.payload.entityID; \n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 410,
-        "y": 120,
-        "wires": [
-            [
-                "47cea5f0.50df8c"
-            ]
-        ]
+        "id": "8713b1a6.c3ea6",
+        "type": "sqlitedb",
+        "z": "",
+        "db": "/home/labuser/euvsvirus",
+        "mode": "RWC"
     },
     {
-        "id": "7e273d55.af9564",
-        "type": "google geocoding",
-        "z": "488f98b4.ed0e28",
+        "id": "ef8715cd.ef97b8",
+        "type": "sqlitedb",
+        "z": "c3338301.aaa24",
+        "db": "/home/labuser/euvsvirus.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "c180059c.8d99d8",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "COVIDResourceFinder@HUA",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "true",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "e4873240.76468",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Register Organization",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "62593732.9f6488",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Submit Supply/Demand",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6436f2d0.2c6edc",
+        "type": "ui_tab",
+        "z": "",
+        "name": "View Analytics",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8385f076.ee6f4",
+        "type": "ui_group",
+        "z": "",
+        "name": "Category",
+        "tab": "e4873240.76468",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "3158289e.e56ec8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Pinpont Location (Right click&Enter)",
+        "tab": "e4873240.76468",
+        "order": 2,
+        "disp": true,
+        "width": "18",
+        "collapse": false
+    },
+    {
+        "id": "1bfc6ecf.b70c61",
+        "type": "ui_group",
+        "z": "",
+        "name": "Supply/Demand Info",
+        "tab": "62593732.9f6488",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "e8beef58.0c97f",
+        "type": "ui_group",
+        "z": "",
+        "name": "Availability",
+        "tab": "6436f2d0.2c6edc",
+        "disp": true,
+        "width": "7",
+        "collapse": false
+    },
+    {
+        "id": "593ab494.c6c85c",
+        "type": "JsonWebToken_config",
+        "z": "",
+        "name": "Server secret key",
+        "secret": "MIICWgIBAAKBgFLb+Y8qOqDxyy8sRcOYGAXFiaKWm+En/5z1+vv3ekn90MtjgbXn"
+    },
+    {
+        "id": "365cfd08.4f3a62",
+        "type": "ui_tab",
+        "z": "",
+        "name": "View Map",
+        "icon": "dashboard",
+        "order": 6,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "90418126.6eb3f",
+        "type": "ui_group",
+        "z": "",
+        "name": "Group 1",
+        "tab": "365cfd08.4f3a62",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "edf55fd3.a8614",
+        "type": "ui_link",
+        "z": "",
+        "name": "View Map",
+        "link": "http://34.74.74.215:1902/worldmap2/",
+        "icon": "open_in_browser",
+        "target": "iframe",
+        "order": 2
+    },
+    {
+        "id": "b670bf02.1c6fd",
+        "type": "ui_group",
+        "z": "31802373.cd690c",
+        "name": "Default",
+        "tab": "1be58a62.b86646",
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "1be58a62.b86646",
+        "type": "ui_tab",
+        "z": "31802373.cd690c",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 10
+    },
+    {
+        "id": "a7c21ffa.f8216",
+        "type": "ui_group",
+        "z": "",
+        "name": "Supply & Demand",
+        "tab": "6436f2d0.2c6edc",
+        "disp": true,
+        "width": "12",
+        "collapse": true
+    },
+    {
+        "id": "6726b221.ce0e2c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Demand for ID",
+        "tab": "6436f2d0.2c6edc",
+        "disp": true,
+        "width": "12",
+        "collapse": true
+    },
+    {
+        "id": "7d74672d.ed3118",
+        "type": "ui_group",
+        "z": "",
+        "name": "Nearest Match",
+        "tab": "62593732.9f6488",
+        "order": 2,
+        "disp": true,
+        "width": "16",
+        "collapse": false
+    },
+    {
+        "id": "d4ebcadc.be6938",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Scoreboard",
+        "icon": "dashboard",
+        "order": 8,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d9e34b20.a1d428",
+        "type": "ui_group",
+        "z": "",
+        "name": "Details",
+        "tab": "d4ebcadc.be6938",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": true
+    },
+    {
+        "id": "40f6712a.8b7e8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "7f591089.ca2a9",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "7f591089.ca2a9",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 9,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d4445bc7.4401f8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Select",
+        "tab": "d4ebcadc.be6938",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d9b7ef9f.d8ba",
+        "type": "amqp-server",
+        "z": "",
+        "host": "localhost",
+        "port": "5672",
+        "vhost": "resourcefinder",
+        "keepalive": "30",
+        "usetls": false,
+        "verifyservercert": true,
+        "useca": false,
+        "ca": "",
+        "usetopology": false,
+        "topology": "{\n\t\"exchanges\": [\n\t\t{\"name\": \"exchange1\", \"type\": \"direct\", \"options\": {\"durable\": false}},\n\t\t{\"name\": \"exchange2\"}\n\t],\n\t\"queues\": [\n\t\t{\"name\": \"queue1\", \"options\": {\"messageTtl\": 60000}},\n\t\t{\"name\": \"queue2\"}\n\t],\n\t\"bindings\": [\n\t\t{\"source\": \"exchange1\", \"queue\": \"queue1\", \"pattern\": \"debug\", \"args\": {}},\n\t\t{\"source\": \"exchange1\", \"exchange\": \"exchange2\", \"pattern\": \"error\"},\n\t\t{\"source\": \"exchange2\", \"queue\": \"queue2\"}\n\t]\n}"
+    },
+    {
+        "id": "af08e722.542d88",
+        "type": "google-api-config",
+        "z": "488f98b4.ed0e28"
+    },
+    {
+        "id": "3a50113c.596e1e",
+        "type": "ui_group",
+        "z": "",
+        "name": "Availability",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "40cbf0a9.d8695",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Extend Available Resources",
+        "icon": "dashboard",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6f11813e.484b4",
+        "type": "ui_tab",
+        "z": "",
+        "name": "New Analytics ",
+        "icon": "dashboard",
+        "order": 7,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "9709a53f.d2fac8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Availability",
+        "tab": "6f11813e.484b4",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "2df41663.db70ba",
+        "type": "ui_group",
+        "z": "",
+        "name": "Supply & Demand info",
+        "tab": "6f11813e.484b4",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "ebe7bc18.1676d",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chart",
+        "tab": "6f11813e.484b4",
+        "order": 3,
+        "disp": false,
+        "width": "10",
+        "collapse": false
+    },
+    {
+        "id": "ef6b539c.9b7b6",
+        "type": "sqlite",
+        "z": "c3338301.aaa24",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "msg.topic",
+        "sql": "",
         "name": "",
-        "geocodeBy": "coordinates",
-        "address": "",
-        "lat": "",
-        "lon": "",
-        "googleAPI": "",
-        "bounds": "",
-        "language": "",
-        "region": "",
-        "components": "",
-        "x": 530,
-        "y": 220,
-        "wires": [
-            [
-                "cda57770.697e98",
-                "4281baee.baf174"
-            ]
-        ]
-    },
-    {
-        "id": "47cea5f0.50df8c",
-        "type": "subflow:c3338301.aaa24",
-        "z": "488f98b4.ed0e28",
-        "name": "",
-        "x": 590,
-        "y": 120,
-        "wires": [
-            [
-                "b3b0e05b.c5499"
-            ]
-        ]
-    },
-    {
-        "id": "b3b0e05b.c5499",
-        "type": "function",
-        "z": "488f98b4.ed0e28",
-        "name": "",
-        "func": "\nmsg.location={};\nmsg.location.lat=msg.payload[0].lat;\nmsg.location.lon=msg.payload[0].lon;\n\n\nmsg.name=msg.payload[0].name;\nmsg.contact_info=msg.payload[0].contact_info;\nmsg.email=msg.payload[0].email;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 730,
-        "y": 120,
-        "wires": [
-            [
-                "7e273d55.af9564"
-            ]
-        ]
-    },
-    {
-        "id": "cda57770.697e98",
-        "type": "function",
-        "z": "488f98b4.ed0e28",
-        "name": "extract city country",
-        "func": "var i=0;\nfor (i=0;i<msg.data.results[0].address_components.length;i++) {\n    if ((msg.data.results[0].address_components[i].types[0]===\"administrative_area_level_2\")){\n        msg.city=msg.data.results[0].address_components[i].short_name;\n        //console.log(\"FOUND CITY:\"+msg.city);\n    }\n    if ((msg.data.results[0].address_components[i].types[0]===\"country\")){\n        msg.country=msg.data.results[0].address_components[i].short_name;\n        //console.log(\"FOUND CITY:\"+msg.city);\n    }\n    //console.log(\"external loop:\"+i);\n}\n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 790,
-        "y": 220,
+        "x": 370,
+        "y": 160,
         "wires": [
             []
         ]
     },
     {
-        "id": "4281baee.baf174",
+        "id": "1d02aee3.f53d91",
+        "type": "subflow:c3338301.aaa24",
+        "z": "77965529.2e46dc",
+        "name": "",
+        "env": [],
+        "x": 670,
+        "y": 100,
+        "wires": [
+            [
+                "2b9d8152.b3015e"
+            ]
+        ]
+    },
+    {
+        "id": "30be3e23.bb82c2",
+        "type": "inject",
+        "z": "77965529.2e46dc",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "1394dc75.e36aa4",
+                "ef425574.dbd6d8",
+                "785c90e6.08dfc",
+                "a1cc1d9c.189d1",
+                "40dd6875.3b1408"
+            ]
+        ]
+    },
+    {
+        "id": "ef425574.dbd6d8",
+        "type": "function",
+        "z": "77965529.2e46dc",
+        "name": "TABLE ENTITIES",
+        "func": "msg.topic= 'create table IF NOT EXISTS entities (entityID INTEGER PRIMARY KEY,name text NOT NULL, email text NOT NULL,\\\n            lon numeric NOT NULL, lat numeric NOT NULL,type text NOT NULL,contact_info text NOT NULL,\\\n            key text NOT NULL)';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 40,
+        "wires": [
+            [
+                "1d02aee3.f53d91"
+            ]
+        ]
+    },
+    {
+        "id": "1394dc75.e36aa4",
+        "type": "function",
+        "z": "77965529.2e46dc",
+        "name": "TABLE SUPPLIES",
+        "func": "msg.topic = 'CREATE TABLE IF NOT EXISTS supplies (category TEXT NOT NULL, type TEXT NOT NULL, number INT NOT NULL, entityID INT NOT NULL, \\\n            UNIQUE(entityID, category, type)\\\n            ON CONFLICT REPLACE)';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 100,
+        "wires": [
+            [
+                "1d02aee3.f53d91"
+            ]
+        ]
+    },
+    {
+        "id": "785c90e6.08dfc",
+        "type": "function",
+        "z": "77965529.2e46dc",
+        "name": "TABLE DEMANDS",
+        "func": "msg.topic = 'CREATE TABLE IF NOT EXISTS demands (category TEXT NOT NULL, type TEXT NOT NULL, number INT NOT NULL, entityID INT NOT NULL, \\\n            UNIQUE(entityID, category, type)\\\n            ON CONFLICT REPLACE)';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "1d02aee3.f53d91"
+            ]
+        ]
+    },
+    {
+        "id": "a1cc1d9c.189d1",
+        "type": "function",
+        "z": "77965529.2e46dc",
+        "name": "TABLE RESOURCES",
+        "func": "msg.topic='create table IF NOT EXISTS resources(category text NOT NULL, type text NOT NULL, UNIQUE(category, type) ON CONFLICT IGNORE)';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "1d02aee3.f53d91"
+            ]
+        ]
+    },
+    {
+        "id": "2b9d8152.b3015e",
         "type": "debug",
-        "z": "488f98b4.ed0e28",
+        "z": "77965529.2e46dc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1150,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e560dc62.cdbc4",
+        "type": "inject",
+        "z": "77965529.2e46dc",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 340,
+        "y": 500,
+        "wires": [
+            [
+                "c47ed613.3e2ec8"
+            ]
+        ]
+    },
+    {
+        "id": "40dd6875.3b1408",
+        "type": "function",
+        "z": "77965529.2e46dc",
+        "name": "TABLE SCOREBOARD",
+        "func": "msg.topic = \"CREATE TABLE IF NOT EXISTS scoreboard(entityID INT NOT NULL, points INT NOT NULL, category TEXT NOT NULL, type TEXT NOT NULL, \\\n        UNIQUE(entityID, category, type) ON CONFLICT REPLACE)\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "1d02aee3.f53d91"
+            ]
+        ]
+    },
+    {
+        "id": "51f883e8.dc254c",
+        "type": "debug",
+        "z": "31802373.cd690c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 190,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "12c00567.7853cb",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "split",
+        "func": "flow.set('lat',msg.payload.lat);\nflow.set('lon',msg.payload.lon);\n\n msg.lat=msg.payload.lat;\n msg.lon=msg.payload.lon;\n\n\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 40,
+        "wires": [
+            [
+                "9c6ad3d5.712a1",
+                "6e9b5fa.fec4da"
+            ]
+        ]
+    },
+    {
+        "id": "4fa6dd66.99b1c4",
+        "type": "ui_text",
+        "z": "31802373.cd690c",
+        "group": "8385f076.ee6f4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Lon",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 870,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e65f2b09.cdc2f8",
+        "type": "ui_text",
+        "z": "31802373.cd690c",
+        "group": "8385f076.ee6f4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Lat",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 870,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "9c6ad3d5.712a1",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "lat",
+        "func": "msg.payload={};\nmsg.payload=msg.lat;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 40,
+        "wires": [
+            [
+                "e65f2b09.cdc2f8"
+            ]
+        ]
+    },
+    {
+        "id": "6e9b5fa.fec4da",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "lon",
+        "func": "msg.payload={};\nmsg.payload=msg.lon;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 80,
+        "wires": [
+            [
+                "4fa6dd66.99b1c4"
+            ]
+        ]
+    },
+    {
+        "id": "c43ffe3b.68d69",
+        "type": "debug",
+        "z": "31802373.cd690c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 430,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "7f804214.05fbcc",
+        "type": "switch",
+        "z": "31802373.cd690c",
+        "name": "",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "point",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 40,
+        "wires": [
+            [
+                "12c00567.7853cb",
+                "c43ffe3b.68d69"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6111ace8.ca63b4",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "getDistinctCategories",
+        "url": "/api/getDistinctCategories",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 40,
+        "wires": [
+            [
+                "3a048558.dcea3a"
+            ]
+        ]
+    },
+    {
+        "id": "3a048558.dcea3a",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Select distinct categories",
+        "func": "msg.topic = 'SELECT DISTINCT category FROM resources'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 40,
+        "wires": [
+            [
+                "cb18d6ad.784f68"
+            ]
+        ]
+    },
+    {
+        "id": "79145444.898c8c",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 720,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "8df7ff9e.40262",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "getDistinctTypes",
+        "url": "/api/getDistinctTypes",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "104ed3ca.49b5ac"
+            ]
+        ]
+    },
+    {
+        "id": "104ed3ca.49b5ac",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Select distinct types",
+        "func": "msg.topic = 'SELECT DISTINCT type FROM resources'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "cb18d6ad.784f68"
+            ]
+        ]
+    },
+    {
+        "id": "cb18d6ad.784f68",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "EUvsVIRUS",
+        "x": 530,
+        "y": 100,
+        "wires": [
+            [
+                "79145444.898c8c"
+            ]
+        ]
+    },
+    {
+        "id": "a73bbc5f.6eef5",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "addType",
+        "url": "/api/addType",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 240,
+        "wires": [
+            [
+                "5e510776.2793e8"
+            ]
+        ]
+    },
+    {
+        "id": "5e510776.2793e8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if(msg.payload.type && msg.payload.category) {\n    msg.params = {\n        $type: msg.payload.type,\n        $category: msg.payload.category\n    };\n} else {\n    msg.error = 'Not a valid payload!';\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "fefb943c.0b0788"
+            ]
+        ]
+    },
+    {
+        "id": "beafe28f.cb9a2",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO resources (type, category) values($type, $category)",
+        "name": "EUvsVIRUS",
+        "x": 640,
+        "y": 180,
+        "wires": [
+            [
+                "daa4a936.075a78"
+            ]
+        ]
+    },
+    {
+        "id": "fefb943c.0b0788",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "beafe28f.cb9a2"
+            ],
+            [
+                "32ae4185.05ed2e"
+            ]
+        ]
+    },
+    {
+        "id": "daa4a936.075a78",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set status to 201",
+        "func": "msg.res.status = 201;\nmsg.statusCode = 201;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 860,
+        "y": 180,
+        "wires": [
+            [
+                "27480007.07162"
+            ]
+        ]
+    },
+    {
+        "id": "27480007.07162",
+        "type": "template",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "201: created",
+        "output": "str",
+        "x": 1050,
+        "y": 180,
+        "wires": [
+            [
+                "d7fa7454.554cb8"
+            ]
+        ]
+    },
+    {
+        "id": "d7fa7454.554cb8",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1180,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "32ae4185.05ed2e",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set status code to 400",
+        "func": "msg.res.status = 400;\nmsg.statusCode = 400;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 240,
+        "wires": [
+            [
+                "84abfcc4.7acb6"
+            ]
+        ]
+    },
+    {
+        "id": "84abfcc4.7acb6",
+        "type": "template",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "400: bad request",
+        "output": "str",
+        "x": 930,
+        "y": 240,
+        "wires": [
+            [
+                "d7fa7454.554cb8"
+            ]
+        ]
+    },
+    {
+        "id": "cc21f6f4.7bff28",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "addEntity",
+        "url": "/api/addEntity",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 340,
+        "wires": [
+            [
+                "a081abd0.768978"
+            ]
+        ]
+    },
+    {
+        "id": "a081abd0.768978",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!(msg.payload.name && msg.payload.lat && msg.payload.lon && msg.payload.type\n    && msg.payload.contact_info && msg.payload.key && msg.payload.email)) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "e3e0266a.b61558"
+            ]
+        ]
+    },
+    {
+        "id": "e3e0266a.b61558",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 440,
+        "y": 340,
+        "wires": [
+            [
+                "5d7f9992.085288"
+            ],
+            [
+                "db41c3fd.3aa15"
+            ]
+        ]
+    },
+    {
+        "id": "5d7f9992.085288",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check by email if entity exists",
+        "func": "msg.info = msg.payload;\nmsg.payload = {};\nmsg.params = {\n    $email: msg.info.email\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 300,
+        "wires": [
+            [
+                "f639a891.5656b8"
+            ]
+        ]
+    },
+    {
+        "id": "f639a891.5656b8",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT * FROM entities WHERE email = $email",
+        "name": "EUvsVIRUS",
+        "x": 900,
+        "y": 300,
+        "wires": [
+            [
+                "2ee8170c.2dff08"
+            ]
+        ]
+    },
+    {
+        "id": "2ee8170c.2dff08",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 680,
+        "y": 400,
+        "wires": [
+            [
+                "af5f54ef.6daec8"
+            ],
+            [
+                "6916faa.c177704"
+            ]
+        ]
+    },
+    {
+        "id": "af5f54ef.6daec8",
+        "type": "bcrypt",
+        "z": "824f57fd.e52648",
+        "name": "Encrypt pwd",
+        "action": "encrypt",
+        "field": "info.key",
+        "hash": "",
+        "rounds": "5",
+        "x": 880,
+        "y": 380,
+        "wires": [
+            [
+                "86705810.0845d8"
+            ]
+        ]
+    },
+    {
+        "id": "86705810.0845d8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for insert",
+        "func": "msg.params = {\n    $name: msg.info.name,\n    $lat: msg.info.lat,\n    $lon: msg.info.lon,\n    $type: msg.info.type,\n    $contact_info: msg.info.contact_info,\n    $key: msg.info.key,\n    $email: msg.info.email\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1090,
+        "y": 380,
+        "wires": [
+            [
+                "54055afb.007ff4"
+            ]
+        ]
+    },
+    {
+        "id": "54055afb.007ff4",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO entities (name, lat, lon, type, contact_info, key, email) values($name, $lat, $lon, $type, $contact_info, $key, $email)",
+        "name": "EUvsVIRUS",
+        "x": 950,
+        "y": 440,
+        "wires": [
+            [
+                "cd70713f.fb69d"
+            ]
+        ]
+    },
+    {
+        "id": "6916faa.c177704",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set status to 409 - Conflict",
+        "func": "msg.res.status = 409;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "337c6177.de3b1e"
+            ]
+        ]
+    },
+    {
+        "id": "cd70713f.fb69d",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {};\nmsg.params = {\n    $email: msg.info.email\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1060,
+        "y": 500,
+        "wires": [
+            [
+                "5de8b366.a7720c"
+            ]
+        ]
+    },
+    {
+        "id": "be1551d8.74a81",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "409",
+        "headers": {},
+        "x": 870,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "337c6177.de3b1e",
+        "type": "template",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "409: user exists",
+        "output": "str",
+        "x": 710,
+        "y": 520,
+        "wires": [
+            [
+                "be1551d8.74a81"
+            ]
+        ]
+    },
+    {
+        "id": "300eec32.378c84",
+        "type": "ui_form",
+        "z": "31802373.cd690c",
+        "name": "",
+        "label": "",
+        "group": "8385f076.ee6f4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Organization Name",
+                "value": "name",
+                "type": "text",
+                "required": true
+            },
+            {
+                "label": "Contact point",
+                "value": "contactName",
+                "type": "text",
+                "required": true
+            },
+            {
+                "label": "Contact email",
+                "value": "contactEmail",
+                "type": "email",
+                "required": true
+            },
+            {
+                "label": "Pwd",
+                "value": "password",
+                "type": "password",
+                "required": true
+            }
+        ],
+        "formValue": {
+            "name": "",
+            "contactName": "",
+            "contactEmail": "",
+            "password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 670,
+        "y": 180,
+        "wires": [
+            [
+                "9755c87c.79f608"
+            ]
+        ]
+    },
+    {
+        "id": "9755c87c.79f608",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "",
+        "func": "//\"{\n//name:<name>,\n//lat:<lat>,\n//lon:<lon>,\n//type:<type>,\n//contact_info:<contact_info>\n//key:<key>,\n//email:<email>\n//}\"\n\nvar input=msg.payload;\nmsg.payload={};\nmsg.payload.type=flow.get('type');\nmsg.payload.lat=flow.get('lat');\nmsg.payload.lon=flow.get('lon');\nmsg.payload.name=input.name;\nmsg.payload.contact_info=input.contactName;\nmsg.payload.key=input.password;\nmsg.payload.email=input.contactEmail;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 180,
+        "wires": [
+            [
+                "958e7a93.ef8788"
+            ]
+        ]
+    },
+    {
+        "id": "958e7a93.ef8788",
+        "type": "http request",
+        "z": "31802373.cd690c",
+        "name": "call addEntity",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://localhost:1902/api/addEntity",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 950,
+        "y": 180,
+        "wires": [
+            [
+                "acc7bb08.074968"
+            ]
+        ]
+    },
+    {
+        "id": "514a68aa.a9c5c8",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "retrieve supply data",
+        "func": "\n\n\nmsg.topic='SELECT sup.entityID,sup.category, sup.type, sup.number, ent.name, ent.email, ent.lat,ent.lon \\\nFROM \\\n    supplies sup \\\nINNER JOIN entities ent ON \\\n    ent.entityID = sup.entityID';\n    \nmsg.supply=true;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 80,
+        "wires": [
+            [
+                "55723658.214b08"
+            ]
+        ]
+    },
+    {
+        "id": "55723658.214b08",
+        "type": "subflow:c3338301.aaa24",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "env": [],
+        "x": 630,
+        "y": 120,
+        "wires": [
+            [
+                "3910a4ca.d2b82c"
+            ]
+        ]
+    },
+    {
+        "id": "ee0351f3.80168",
+        "type": "worldmap",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "lat": "50.8503",
+        "lon": "4.3517",
+        "zoom": "5",
+        "layer": "",
+        "cluster": "",
+        "maxage": "600",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "true",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "path": "/worldmap2",
+        "x": 1090,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8de212f.d38aef",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "create pin",
+        "func": "var input=msg.payload;\nmsg.payload={};\nmsg.payload.name=input.name+'_'+input.entityID;\nmsg.payload.lat=input.lat;\nmsg.payload.lon=input.lon;\nmsg.payload.email=input.email;\nmsg.payload.category=input.category;\nmsg.payload.type=input.type;\nmsg.payload.quantity=input.number;\n\n\n\nif (msg.supply){\n    if (msg.payload.category===\"Human Resources\"){\n        msg.payload.icon=\"fa-user-md\";\n    }\n    if (msg.payload.category===\"Facilities\"){\n        msg.payload.icon=\"fa-building\";\n    }\n    if (msg.payload.category===\"Research Data\"){\n        msg.payload.icon=\"fa-database\";\n    }\n    msg.payload.iconColor=\"green\";\n    msg.payload.status=\"AVAILABLE\";\n}else {\n    if (msg.payload.category===\"Human Resources\"){\n        msg.payload.icon=\"fa-user-md\";\n    }\n    \n    if (msg.payload.category===\"Facilities\"){\n        msg.payload.icon=\"fa-building\";\n    }\n    \n    if (msg.payload.category===\"Research Data\"){\n        msg.payload.icon=\"fa-database\";\n    }\n    msg.payload.iconColor=\"red\";\n    msg.payload.status=\"IN NEED\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 920,
+        "y": 120,
+        "wires": [
+            [
+                "ee0351f3.80168",
+                "62705dca.c5c9f4"
+            ]
+        ]
+    },
+    {
+        "id": "ceb4c241.52258",
+        "type": "debug",
+        "z": "90a7ac04.b4395",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -175,16 +1558,4127 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 670,
+        "x": 360,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "10d16524.4e415b",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "retrieve demand data",
+        "func": "\n\n\nmsg.topic='SELECT sup.entityID,sup.category, sup.type, sup.number, ent.name, ent.email, ent.lat,ent.lon \\\nFROM \\\n    demands sup \\\nINNER JOIN entities ent ON \\\n    ent.entityID = sup.entityID';\n    \nmsg.supply=false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 140,
+        "wires": [
+            [
+                "55723658.214b08"
+            ]
+        ]
+    },
+    {
+        "id": "d3e5c66a.561458",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "authorize",
+        "url": "/api/authorize",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 600,
+        "wires": [
+            [
+                "b17d9e4c.10a89"
+            ]
+        ]
+    },
+    {
+        "id": "b17d9e4c.10a89",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if(!(msg.req.query.email && msg.req.query.password)) {\n    msg.error = \"Not a valid payload\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 600,
+        "wires": [
+            [
+                "12be24e1.39dd1b"
+            ]
+        ]
+    },
+    {
+        "id": "12be24e1.39dd1b",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 600,
+        "wires": [
+            [
+                "dc18ed7a.a6a9f"
+            ],
+            [
+                "cff0a2d8.96a28"
+            ]
+        ]
+    },
+    {
+        "id": "cff0a2d8.96a28",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set status code to 401",
+        "func": "msg.res.status = 401;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 160,
+        "y": 660,
+        "wires": [
+            [
+                "296813e9.248e6c"
+            ]
+        ]
+    },
+    {
+        "id": "296813e9.248e6c",
+        "type": "template",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "401: Unauthorized",
+        "output": "str",
+        "x": 360,
+        "y": 660,
+        "wires": [
+            [
+                "4831af5e.0aa8a"
+            ]
+        ]
+    },
+    {
+        "id": "4831af5e.0aa8a",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "401",
+        "headers": {},
+        "x": 520,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "dc18ed7a.a6a9f",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $email: msg.req.query.email\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 620,
+        "y": 580,
+        "wires": [
+            [
+                "e6e698e5.b83b28"
+            ]
+        ]
+    },
+    {
+        "id": "e6e698e5.b83b28",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT key, entityID FROM entities WHERE email = $email",
+        "name": "EUvsVIRUS",
+        "x": 810,
+        "y": 580,
+        "wires": [
+            [
+                "7c2c4f10.450d5"
+            ]
+        ]
+    },
+    {
+        "id": "2227fc32.9101d4",
+        "type": "bcrypt",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "action": "verify",
+        "field": "req.query.password",
+        "hash": "payload",
+        "rounds": "5",
+        "x": 630,
+        "y": 720,
+        "wires": [
+            [
+                "e208364d.73b9d8"
+            ]
+        ]
+    },
+    {
+        "id": "d9eb523a.7abdb",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set key to payload",
+        "func": "temp_key = msg.payload[0].key\ntemp_entityID = msg.payload[0].entityID;\ndelete msg.payload;\nmsg.payload = temp_key;\nmsg.entityID = temp_entityID;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 720,
+        "wires": [
+            [
+                "2227fc32.9101d4"
+            ]
+        ]
+    },
+    {
+        "id": "7c2c4f10.450d5",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 660,
+        "wires": [
+            [
+                "bfa8fc35.1fbef"
+            ],
+            [
+                "d9eb523a.7abdb"
+            ]
+        ]
+    },
+    {
+        "id": "bfa8fc35.1fbef",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set status code to 401",
+        "func": "msg.res.status = 401;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 900,
+        "y": 640,
+        "wires": [
+            [
+                "2ccf17df.6abaf8"
+            ]
+        ]
+    },
+    {
+        "id": "2ccf17df.6abaf8",
+        "type": "template",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "401: Unauthorized",
+        "output": "str",
+        "x": 1100,
+        "y": 640,
+        "wires": [
+            [
+                "e86da2f6.2b93a"
+            ]
+        ]
+    },
+    {
+        "id": "e86da2f6.2b93a",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "401",
+        "headers": {},
+        "x": 1260,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "e208364d.73b9d8",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "match",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 770,
+        "y": 720,
+        "wires": [
+            [
+                "425bda91.3a3a64"
+            ],
+            [
+                "8f9f18c5.b387e8"
+            ]
+        ]
+    },
+    {
+        "id": "425bda91.3a3a64",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set status code to 401",
+        "func": "msg.res.status = 401;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 960,
+        "y": 700,
+        "wires": [
+            [
+                "e0b61481.ea9aa8"
+            ]
+        ]
+    },
+    {
+        "id": "e0b61481.ea9aa8",
+        "type": "template",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "401: Unauthorized",
+        "output": "str",
+        "x": 1160,
+        "y": 700,
+        "wires": [
+            [
+                "d88e95f.bd63168"
+            ]
+        ]
+    },
+    {
+        "id": "d88e95f.bd63168",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "401",
+        "headers": {},
+        "x": 1320,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "8f9f18c5.b387e8",
+        "type": "JsonWebToken",
+        "z": "824f57fd.e52648",
+        "name": "Create JWT from hashed key",
+        "tokenconfig": "593ab494.c6c85c",
+        "x": 660,
+        "y": 780,
+        "wires": [
+            [
+                "e2af1ac1.8ea5c8"
+            ]
+        ]
+    },
+    {
+        "id": "e2af1ac1.8ea5c8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Create data fro response",
+        "func": "msg.payload = {};\nmsg.payload.authedicated = true;\nmsg.payload.token = msg.token;\nmsg.payload.userID = msg.entityID;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 930,
+        "y": 780,
+        "wires": [
+            [
+                "f94b0728.fd1c08"
+            ]
+        ]
+    },
+    {
+        "id": "f94b0728.fd1c08",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1130,
+        "y": 780,
+        "wires": [
+            [
+                "3f60e049.ca7ff"
+            ]
+        ]
+    },
+    {
+        "id": "3f60e049.ca7ff",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1280,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "66eae754.1efbb8",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "submitMaterial",
+        "url": "/api/submitMaterial",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 880,
+        "wires": [
+            [
+                "718ab042.980cd",
+                "58a83591.ba72fc"
+            ]
+        ]
+    },
+    {
+        "id": "718ab042.980cd",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!(msg.payload.userID && msg.payload.materialCategory && msg.payload.materialSpecific \n    && msg.payload.quantity && msg.payload.needed)) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 880,
+        "wires": [
+            [
+                "7de15d86.65df64"
+            ]
+        ]
+    },
+    {
+        "id": "7de15d86.65df64",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 880,
+        "wires": [
+            [
+                "3c79532f.0c3c4c"
+            ],
+            [
+                "6f3015aa.76325c"
+            ]
+        ]
+    },
+    {
+        "id": "b3a5dbaf.3965f8",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload.needed",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "true",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "false",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 860,
+        "wires": [
+            [
+                "e3333c34.ae898"
+            ],
+            [
+                "d3275d8f.d8d19"
+            ]
+        ]
+    },
+    {
+        "id": "3c79532f.0c3c4c",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Create params for insert",
+        "func": "msg.params = {\n    $userID: msg.payload.userID,\n    $materialCategory: msg.payload.materialCategory,\n    $materialSpecific: msg.payload.materialSpecific,\n    $quantity: msg.payload.quantity\n}\nmsg.info = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 860,
+        "wires": [
+            [
+                "b3a5dbaf.3965f8"
+            ]
+        ]
+    },
+    {
+        "id": "833750ac.0bce4",
+        "type": "comment",
+        "z": "824f57fd.e52648",
+        "name": "TODO: JWT Implementaion IMPORTANT",
+        "info": "## Each request (get/post) will have to have an JWT token in its body.\nYou can get JWT token using /api/authorize\nToken must be in the body of the request:\n\"token\":<token>\n\n# IMPORTANT:\nJWT is not yet integrated for API methods.\n",
+        "x": 1040,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e3333c34.ae898",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO demands (category, type, number, entityID) values($materialCategory, $materialSpecific, $quantity, $userID)",
+        "name": "Demands",
+        "x": 980,
+        "y": 820,
+        "wires": [
+            [
+                "5e67a6a0.6b4b78"
+            ]
+        ]
+    },
+    {
+        "id": "5e67a6a0.6b4b78",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set status code to 200",
+        "func": "msg.res.status = 200;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1160,
+        "y": 860,
+        "wires": [
+            [
+                "2e72b8b1.a5eb88"
+            ]
+        ]
+    },
+    {
+        "id": "2e72b8b1.a5eb88",
+        "type": "template",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "200: Ok",
+        "output": "str",
+        "x": 1260,
+        "y": 920,
+        "wires": [
+            [
+                "ca299ba.d7d4868"
+            ]
+        ]
+    },
+    {
+        "id": "ca299ba.d7d4868",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1320,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "71175d12.b39c44",
+        "type": "ui_form",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "label": "",
+        "group": "1bfc6ecf.b70c61",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Token",
+                "value": "token",
+                "type": "text",
+                "required": true
+            },
+            {
+                "label": "If needed, select",
+                "value": "needed",
+                "type": "switch",
+                "required": true
+            },
+            {
+                "label": "Quantity",
+                "value": "quantity",
+                "type": "text",
+                "required": true
+            },
+            {
+                "label": "UserID",
+                "value": "userID",
+                "type": "text",
+                "required": true
+            },
+            {
+                "label": "Radius",
+                "value": "radius",
+                "type": "text",
+                "required": false
+            },
+            {
+                "label": "Search only (no submission)",
+                "value": "search",
+                "type": "switch",
+                "required": true
+            }
+        ],
+        "formValue": {
+            "token": "",
+            "needed": false,
+            "quantity": "",
+            "userID": "",
+            "radius": "",
+            "search": false
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 70,
+        "y": 240,
+        "wires": [
+            [
+                "250c549e.61633c"
+            ]
+        ]
+    },
+    {
+        "id": "7b8874f6.94fe8c",
+        "type": "inject",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 540,
+        "wires": [
+            [
+                "c903d8a.af8b928",
+                "3cbed38.5d89b2c",
+                "f5e31d52.dd79b",
+                "45c53145.d37b3"
+            ]
+        ]
+    },
+    {
+        "id": "c903d8a.af8b928",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "test data sup",
+        "func": "var newMsg={\n    \"topic\":\"INSERT INTO supplies values('paraiatrika','maskes',25,46),\\\n    ('Medicine','depon',12,81),\\\n    ('Materials','masks',12,74),\\\n    ('Research Data','Clinical Charts',12,73),\\\n    ('Human Resources','Doctors',12,72),\\\n    ('Facilities','lab',12,78)\\\n    \"\n}\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 500,
+        "wires": [
+            [
+                "20b15dbe.003332"
+            ]
+        ]
+    },
+    {
+        "id": "f4ba0707.5031d8",
+        "type": "debug",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 650,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "20b15dbe.003332",
+        "type": "subflow:c3338301.aaa24",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "x": 470,
+        "y": 540,
+        "wires": [
+            [
+                "f4ba0707.5031d8"
+            ]
+        ]
+    },
+    {
+        "id": "3cbed38.5d89b2c",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "test data dem",
+        "func": "\nvar newMsg={\n    \"topic\":\"INSERT INTO demands values('paraiatrika','maskes',12,57), \\\n    ('Materials','suits',12,77),\\\n    ('Materials','masks',12,76),\\\n    ('Research Data','Clinical Charts',12,71),\\\n    ('Human Resources','Doctors',12,72),\\\n    ('Facilities','lab',12,73)\\\n    \"\n}\nreturn newMsg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 580,
+        "wires": [
+            [
+                "20b15dbe.003332"
+            ]
+        ]
+    },
+    {
+        "id": "ed8e7787.45b308",
+        "type": "ui_dropdown",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "label": "Category",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "1bfc6ecf.b70c61",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "Medicine",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Materials",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Research Data",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Human Resources",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Facilities",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "d68fc378.b87ea"
+            ]
+        ]
+    },
+    {
+        "id": "c8fdbf1a.a26ae",
+        "type": "ui_dropdown",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "label": "Type",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "1bfc6ecf.b70c61",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Masks ",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Respirators",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Doctors",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Clinical charts",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "ICUs",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "2c5c8de7.0e26e2",
+                "bc83ce78.ff7a5"
+            ]
+        ]
+    },
+    {
+        "id": "e84101c.e42dd",
+        "type": "inject",
+        "z": "31802373.cd690c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "x": 90,
+        "y": 440,
+        "wires": [
+            [
+                "7086bfa9.db045"
+            ]
+        ]
+    },
+    {
+        "id": "aaa73805.2abfa8",
+        "type": "ui_template",
+        "z": "31802373.cd690c",
+        "group": "3158289e.e56ec8",
+        "name": "",
+        "order": 0,
+        "width": "15",
+        "height": "14",
+        "format": "<div ng-bind-html=\"msg.payload | trusted\" ></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 460,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7086bfa9.db045",
+        "type": "template",
+        "z": "31802373.cd690c",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<iframe src=\"../worldmap\" height=650px width=750px></iframe>",
+        "x": 280,
+        "y": 440,
+        "wires": [
+            [
+                "aaa73805.2abfa8"
+            ]
+        ]
+    },
+    {
+        "id": "e787a767.7b1a98",
+        "type": "comment",
+        "z": "31802373.cd690c",
+        "name": "How to embed Map in Dashboard",
+        "info": "This example shows how to embed the Worldmap \ninto a template node within the `node-red-dashboard`\n\nThe first flow creates a dashboard button that \ngenerates a randon position, with the required \nicon, and passes that to the worldmap. The\nmap is configured to automatically pan to the\nposition of any point that arrives.\n\nThe second flow initialise the dashboard template\nwith the initial map and sets it to a more square shape\nby adjusting the height.",
+        "x": 220,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2c5c8de7.0e26e2",
+        "type": "function",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "func": "flow.set('type',msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d68fc378.b87ea",
+        "type": "function",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "func": "flow.set('category',msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc83ce78.ff7a5",
+        "type": "debug",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 500,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "250c549e.61633c",
+        "type": "function",
+        "z": "dc4cb0ee.881d9",
+        "name": "PREPARE CALL",
+        "func": "msg.payload.materialSpecific=flow.get('type');\nmsg.payload.materialCategory=flow.get('category');\nmsg.radius=msg.payload.radius;\nmsg.needed=msg.payload.needed;\n\nif (msg.payload.needed) {\n    msg.payload.needed=\"true\";\n}else {\n    msg.payload.needed=\"false\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "2657ccb6.04f8b4",
+                "4ee13a33.9e3f44"
+            ]
+        ]
+    },
+    {
+        "id": "68af4078.4a9dd",
+        "type": "JsonWebToken",
+        "z": "f02b58bd.b1cbd8",
+        "name": "Verify token",
+        "tokenconfig": "593ab494.c6c85c",
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "a1600786.96d348"
+            ]
+        ]
+    },
+    {
+        "id": "ad36f65.445ec08",
+        "type": "function",
+        "z": "f02b58bd.b1cbd8",
+        "name": "Set token to msg.token",
+        "func": "msg.token = msg.payload.token;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 420,
+        "y": 160,
+        "wires": [
+            [
+                "68af4078.4a9dd"
+            ]
+        ]
+    },
+    {
+        "id": "a1600786.96d348",
+        "type": "switch",
+        "z": "f02b58bd.b1cbd8",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 790,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "744239c0.6dc718"
+            ]
+        ]
+    },
+    {
+        "id": "744239c0.6dc718",
+        "type": "function",
+        "z": "f02b58bd.b1cbd8",
+        "name": "Set status code to 401",
+        "func": "msg.res.status = 401;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 800,
+        "y": 220,
+        "wires": [
+            [
+                "2aa7e3ff.e0c6ac"
+            ]
+        ]
+    },
+    {
+        "id": "2aa7e3ff.e0c6ac",
+        "type": "template",
+        "z": "f02b58bd.b1cbd8",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "401: Unathorized",
+        "output": "str",
+        "x": 700,
+        "y": 280,
+        "wires": [
+            [
+                "19543490.4a2f2b"
+            ]
+        ]
+    },
+    {
+        "id": "19543490.4a2f2b",
+        "type": "http response",
+        "z": "f02b58bd.b1cbd8",
+        "name": "",
+        "statusCode": "401",
+        "headers": {},
+        "x": 860,
         "y": 280,
         "wires": []
     },
     {
-        "id": "82736b0e.73c378",
-        "type": "tab",
-        "label": "Messaging",
-        "disabled": false,
-        "info": ""
+        "id": "7eaa57b1.7bea88",
+        "type": "worldmap in",
+        "z": "31802373.cd690c",
+        "name": "",
+        "path": "/worldmap",
+        "events": "all",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "7f804214.05fbcc",
+                "51f883e8.dc254c"
+            ]
+        ]
+    },
+    {
+        "id": "8813bb1.d6ea148",
+        "type": "worldmap",
+        "z": "31802373.cd690c",
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "true",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "path": "/worldmap",
+        "x": 440,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f5e31d52.dd79b",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "entity 55",
+        "func": "\n\n\nvar newMsg={\n    \"topic\":\"INSERT INTO entities values(57,'Myorg','myemail@gm.com',23.727539,37.983810,'sdsds','sjds','mspiggy') \"\n}\nreturn newMsg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 660,
+        "wires": [
+            [
+                "20b15dbe.003332"
+            ]
+        ]
+    },
+    {
+        "id": "45c53145.d37b3",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "entity 44",
+        "func": "\n\nvar newMsg={\n    \"topic\":\"INSERT INTO entities values (81,'Univ','myemail@gm.com',22.9434,40.6501,'Research Institute','dept','mspiggy'),\\\n    (85,'Univ','myemail@gm.com',22.9434,40.6501,'Research Institute','dept','mspiggy'),\\\n    (87,'AXEPA','myemail@gm.com',22.9334,40.6201,'Hospital','dept','mspiggy'),\\\n    (89,'MyComp SA','myemail@gm.com',22.9434,40.6501,'Commercial','dept','mspiggy'),\\\n    (95,'YetANotherComp','myemail@gm.com',22.9434,40.6501,'Donor','dept','mspiggy'),\\\n    (99,'GoodCompany SA','myemail@gm.com',22.9934,40.7501,'Donor','dept','mspiggy'),\\\n    (100,'YetANotherComp','myemail@gm.com',22.8434,41.6501,'Donor','dept','mspiggy')\\\n    \"\n}\nreturn newMsg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 720,
+        "wires": [
+            [
+                "20b15dbe.003332",
+                "ceb4c241.52258"
+            ]
+        ]
+    },
+    {
+        "id": "5654aa7b.316fc4",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/supplies/:type",
+        "url": "/api/supplies/:type",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 1120,
+        "wires": [
+            [
+                "d578ab0e.038ac8"
+            ]
+        ]
+    },
+    {
+        "id": "4b946f4.5df949",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $type: msg.req.params.type\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 1080,
+        "wires": [
+            [
+                "cdb9ce36.f0c2d"
+            ]
+        ]
+    },
+    {
+        "id": "d578ab0e.038ac8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!msg.req.params.type) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 1120,
+        "wires": [
+            [
+                "eac68276.23483"
+            ]
+        ]
+    },
+    {
+        "id": "eac68276.23483",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 1120,
+        "wires": [
+            [
+                "4b946f4.5df949"
+            ],
+            [
+                "5b4c98aa.6b6368"
+            ]
+        ]
+    },
+    {
+        "id": "cdb9ce36.f0c2d",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT SUM(number) AS supplies FROM supplies WHERE type = $type",
+        "name": "Supplies",
+        "x": 850,
+        "y": 1080,
+        "wires": [
+            [
+                "9a6f69a8.c6ab08"
+            ]
+        ]
+    },
+    {
+        "id": "9a6f69a8.c6ab08",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1030,
+        "y": 1080,
+        "wires": [
+            [
+                "78bff157.528"
+            ]
+        ]
+    },
+    {
+        "id": "78bff157.528",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1200,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "f37f9b7a.0867a8",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/demands/:type",
+        "url": "/api/demands/:type",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 1560,
+        "wires": [
+            [
+                "35a8612b.3a2e6e"
+            ]
+        ]
+    },
+    {
+        "id": "6292945b.e0e1ec",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $type: msg.req.params.type\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 1520,
+        "wires": [
+            [
+                "9fb937cd.685bc8"
+            ]
+        ]
+    },
+    {
+        "id": "35a8612b.3a2e6e",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!msg.req.params.type) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 1560,
+        "wires": [
+            [
+                "f1ca9409.2facb8"
+            ]
+        ]
+    },
+    {
+        "id": "f1ca9409.2facb8",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 1560,
+        "wires": [
+            [
+                "6292945b.e0e1ec"
+            ],
+            [
+                "dbc4e9ab.8d81e8"
+            ]
+        ]
+    },
+    {
+        "id": "9fb937cd.685bc8",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT SUM(number) AS demand FROM demands WHERE type = $type",
+        "name": "Demands",
+        "x": 850,
+        "y": 1520,
+        "wires": [
+            [
+                "291bbae4.b26106"
+            ]
+        ]
+    },
+    {
+        "id": "291bbae4.b26106",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1030,
+        "y": 1520,
+        "wires": [
+            [
+                "ef9a08b2.822378"
+            ]
+        ]
+    },
+    {
+        "id": "ef9a08b2.822378",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1200,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "62cb76a6.be6e78",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/supplies/:type/:id",
+        "url": "/api/supplies/:type/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1320,
+        "wires": [
+            [
+                "f2a7374f.e1a2a8"
+            ]
+        ]
+    },
+    {
+        "id": "5b8ac06f.b1689",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $type: msg.req.params.type,\n    $id: msg.req.params.id\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 1280,
+        "wires": [
+            [
+                "fa52d56.4f3d328"
+            ]
+        ]
+    },
+    {
+        "id": "f2a7374f.e1a2a8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!(msg.req.params.type && msg.req.params.id)) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 1320,
+        "wires": [
+            [
+                "e2af7a97.2302b8"
+            ]
+        ]
+    },
+    {
+        "id": "e2af7a97.2302b8",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 1320,
+        "wires": [
+            [
+                "5b8ac06f.b1689"
+            ],
+            [
+                "3a77d2db.b5654e"
+            ]
+        ]
+    },
+    {
+        "id": "fa52d56.4f3d328",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT SUM(number) AS supplies FROM supplies WHERE type = $type AND entityID = $id",
+        "name": "Supplies",
+        "x": 850,
+        "y": 1280,
+        "wires": [
+            [
+                "57167b93.0cdc34"
+            ]
+        ]
+    },
+    {
+        "id": "57167b93.0cdc34",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1030,
+        "y": 1280,
+        "wires": [
+            [
+                "f98cdf42.85beb"
+            ]
+        ]
+    },
+    {
+        "id": "f98cdf42.85beb",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1200,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "743a30af.4c54c",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/demands/:type/:id",
+        "url": "/api/demands/:type/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1780,
+        "wires": [
+            [
+                "6c7e2735.01ca88"
+            ]
+        ]
+    },
+    {
+        "id": "2d741905.b8ca96",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $type: msg.req.params.type,\n    $id: msg.req.params.id\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 1740,
+        "wires": [
+            [
+                "295552cc.a6681e"
+            ]
+        ]
+    },
+    {
+        "id": "6c7e2735.01ca88",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!msg.req.params.type && msg.req.params.id) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 1780,
+        "wires": [
+            [
+                "360a8aee.cb1df6"
+            ]
+        ]
+    },
+    {
+        "id": "360a8aee.cb1df6",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 1780,
+        "wires": [
+            [
+                "2d741905.b8ca96"
+            ],
+            [
+                "82b4b38e.0b68a"
+            ]
+        ]
+    },
+    {
+        "id": "295552cc.a6681e",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT SUM(number) AS demand FROM demands WHERE type = $type AND entityID = $id ",
+        "name": "Demands",
+        "x": 850,
+        "y": 1740,
+        "wires": [
+            [
+                "7b8414bd.8657fc"
+            ]
+        ]
+    },
+    {
+        "id": "7b8414bd.8657fc",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1030,
+        "y": 1740,
+        "wires": [
+            [
+                "4697cdd3.9db414"
+            ]
+        ]
+    },
+    {
+        "id": "4697cdd3.9db414",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1200,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "da9c6b17.e0bd58",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/type/:category",
+        "url": "/api/type/:category",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1980,
+        "wires": [
+            [
+                "dd2af307.deb99"
+            ]
+        ]
+    },
+    {
+        "id": "dd2af307.deb99",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!msg.req.params.category) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 1980,
+        "wires": [
+            [
+                "fc10d4da.a7ea18"
+            ]
+        ]
+    },
+    {
+        "id": "fc10d4da.a7ea18",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 1980,
+        "wires": [
+            [
+                "ab559fc.b511c6"
+            ],
+            [
+                "82ee5d61.32954"
+            ]
+        ]
+    },
+    {
+        "id": "ab559fc.b511c6",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $category: msg.req.params.category\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 640,
+        "y": 1940,
+        "wires": [
+            [
+                "da57be21.aa4de"
+            ]
+        ]
+    },
+    {
+        "id": "da57be21.aa4de",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT type FROM resources WHERE category = $category",
+        "name": "Resources",
+        "x": 850,
+        "y": 1940,
+        "wires": [
+            [
+                "cf51b789.b955d8"
+            ]
+        ]
+    },
+    {
+        "id": "cf51b789.b955d8",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1020,
+        "y": 1940,
+        "wires": [
+            [
+                "4df5bce9.ca5ce4"
+            ]
+        ]
+    },
+    {
+        "id": "4df5bce9.ca5ce4",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1200,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "62b7cba0.021914",
+        "type": "template",
+        "z": "bf3352cf.16016",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "400: bad request",
+        "output": "str",
+        "x": 240,
+        "y": 160,
+        "wires": [
+            [
+                "d35c91c6.8f27e"
+            ]
+        ]
+    },
+    {
+        "id": "52da0045.63ce4",
+        "type": "function",
+        "z": "bf3352cf.16016",
+        "name": "Set status code to 400",
+        "func": "msg.res.status = 400;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "62b7cba0.021914"
+            ]
+        ]
+    },
+    {
+        "id": "d35c91c6.8f27e",
+        "type": "http response",
+        "z": "bf3352cf.16016",
+        "name": "",
+        "statusCode": "400",
+        "headers": {},
+        "x": 380,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "82ee5d61.32954",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 360,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "6f3015aa.76325c",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 640,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "82b4b38e.0b68a",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 380,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "dbc4e9ab.8d81e8",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 440,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "3a77d2db.b5654e",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 500,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "5b4c98aa.6b6368",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 520,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "db41c3fd.3aa15",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 420,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3910a4ca.d2b82c",
+        "type": "split",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 770,
+        "y": 120,
+        "wires": [
+            [
+                "8de212f.d38aef"
+            ]
+        ]
+    },
+    {
+        "id": "a2876830.81b308",
+        "type": "debug",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 190,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "62705dca.c5c9f4",
+        "type": "debug",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 850,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "113241b8.88868e",
+        "type": "worldmap in",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "path": "/worldmap2",
+        "events": "all",
+        "x": 80,
+        "y": 140,
+        "wires": [
+            [
+                "26703853.2e28b8",
+                "af38dd6f.5e294"
+            ]
+        ]
+    },
+    {
+        "id": "26703853.2e28b8",
+        "type": "switch",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "connect",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 230,
+        "y": 80,
+        "wires": [
+            [
+                "514a68aa.a9c5c8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "af38dd6f.5e294",
+        "type": "switch",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "connect",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "10d16524.4e415b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ff0c8b0d.1b7e48",
+        "type": "ui_dropdown",
+        "z": "31802373.cd690c",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "8385f076.ee6f4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Hospital",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Research Institute",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Commercial",
+                "type": "str"
+            },
+            {
+                "label": "",
+                "value": "Donor",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 680,
+        "y": 260,
+        "wires": [
+            [
+                "57c7023c.8b363c"
+            ]
+        ]
+    },
+    {
+        "id": "57c7023c.8b363c",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "",
+        "func": "flow.set('type',msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "acc7bb08.074968",
+        "type": "debug",
+        "z": "31802373.cd690c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1070,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "534ea743.282c98",
+        "type": "inject",
+        "z": "31802373.cd690c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 600,
+        "wires": [
+            [
+                "4d3a9e82.34952"
+            ]
+        ]
+    },
+    {
+        "id": "4d3a9e82.34952",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "all entities",
+        "func": "msg.topic='select * from entities';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 600,
+        "wires": [
+            [
+                "f62a05d0.c63c68"
+            ]
+        ]
+    },
+    {
+        "id": "f62a05d0.c63c68",
+        "type": "subflow:c3338301.aaa24",
+        "z": "31802373.cd690c",
+        "name": "",
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "a19cea84.7c0838"
+            ]
+        ]
+    },
+    {
+        "id": "a19cea84.7c0838",
+        "type": "debug",
+        "z": "31802373.cd690c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 590,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "bdda2b82.e259d8",
+        "type": "inject",
+        "z": "31802373.cd690c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 680,
+        "wires": [
+            [
+                "feb4647d.a971f8"
+            ]
+        ]
+    },
+    {
+        "id": "feb4647d.a971f8",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "all resource categories",
+        "func": "msg.topic='select * from resources';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 680,
+        "wires": [
+            [
+                "f62a05d0.c63c68"
+            ]
+        ]
+    },
+    {
+        "id": "2ab43c4d.b7ef84",
+        "type": "inject",
+        "z": "31802373.cd690c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 740,
+        "wires": [
+            [
+                "426dd900.93eff8"
+            ]
+        ]
+    },
+    {
+        "id": "426dd900.93eff8",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "insert resource categories",
+        "func": "msg.topic='insert into resources VALUES (\"Research Data\",\"Clinical Charts\")\\\n,(\"Human Resources\",\"Doctors\")\\\n,(\"Human Resources\",\"Nurses\")\\\n,(\"Facilities\",\"ICUs\")\\\n,(\"Facilities\",\"Analyzers\")\\\n';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 740,
+        "wires": [
+            [
+                "f62a05d0.c63c68"
+            ]
+        ]
+    },
+    {
+        "id": "45c27b70.6879b4",
+        "type": "comment",
+        "z": "31802373.cd690c",
+        "name": "TEST AND INITIALIZE",
+        "info": "",
+        "x": 180,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "9fab91ff.c5a5d",
+        "type": "inject",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 780,
+        "wires": [
+            [
+                "45c53145.d37b3"
+            ]
+        ]
+    },
+    {
+        "id": "c874b52f.bb8d58",
+        "type": "inject",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80,
+        "y": 620,
+        "wires": [
+            [
+                "3cbed38.5d89b2c"
+            ]
+        ]
+    },
+    {
+        "id": "42d3b296.2fc58c",
+        "type": "inject",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80,
+        "y": 460,
+        "wires": [
+            [
+                "c903d8a.af8b928"
+            ]
+        ]
+    },
+    {
+        "id": "defda66f.8b0af8",
+        "type": "function",
+        "z": "90a7ac04.b4395",
+        "name": "entity 44",
+        "func": "\n\nvar newMsg={\n    \"topic\":\"INSERT INTO entities values (71,'Univ','myemail@gm.com',48.20,16.38,'Research Institute','dept','mspiggy'),\\\n    (72,'Univ','myemail@gm.com',48.20,16.38,'Research Institute','dept','mspiggy'),\\\n    (73,'Hosp','myemail@gm.com',48.20,16.38,'Hospital','dept','mspiggy'),\\\n    (74,'AustComp SA','myemail@gm.com',48.20,16.38,'Commercial','dept','mspiggy'),\\\n    (75,'NewComp','myemail@gm.com',37.9834,23.72,'Donor','dept','mspiggy'),\\\n    (76,'MyCompany SA','myemail@gm.com',41.90,12.49,'Donor','dept','mspiggy'),\\\n    (77,'SafeComp','myemail@gm.com',42.90,12.51,'Donor','dept','mspiggy')\\\n    \"\n}\nreturn newMsg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 820,
+        "wires": [
+            [
+                "20b15dbe.003332"
+            ]
+        ]
+    },
+    {
+        "id": "31822d8f.6caed2",
+        "type": "inject",
+        "z": "90a7ac04.b4395",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 140,
+        "y": 840,
+        "wires": [
+            [
+                "defda66f.8b0af8"
+            ]
+        ]
+    },
+    {
+        "id": "54fc1fec.ba4fa",
+        "type": "inject",
+        "z": "31802373.cd690c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 820,
+        "wires": [
+            [
+                "a6d7b9d1.1f6f08"
+            ]
+        ]
+    },
+    {
+        "id": "a6d7b9d1.1f6f08",
+        "type": "function",
+        "z": "31802373.cd690c",
+        "name": "all resource categories",
+        "func": "msg.topic='select * from demands';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 820,
+        "wires": [
+            [
+                "f62a05d0.c63c68"
+            ]
+        ]
+    },
+    {
+        "id": "c47ed613.3e2ec8",
+        "type": "function",
+        "z": "77965529.2e46dc",
+        "name": "",
+        "func": "msg.topic = 'SELECT * FROM entities';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 540,
+        "y": 400,
+        "wires": [
+            [
+                "1d02aee3.f53d91"
+            ]
+        ]
+    },
+    {
+        "id": "875f802c.b26e1",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/scoreboard/:type",
+        "url": "/api/scoreboard/:type",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 2160,
+        "wires": [
+            [
+                "ef42c5fb.0670a8"
+            ]
+        ]
+    },
+    {
+        "id": "ef42c5fb.0670a8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!msg.req.params.type) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 2160,
+        "wires": [
+            [
+                "37b38308.f3c15c"
+            ]
+        ]
+    },
+    {
+        "id": "37b38308.f3c15c",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 2160,
+        "wires": [
+            [
+                "e77b885d.831a68"
+            ],
+            [
+                "45942212.11f2dc"
+            ]
+        ]
+    },
+    {
+        "id": "45942212.11f2dc",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 410,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "e77b885d.831a68",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $type: msg.req.params.type\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 2120,
+        "wires": [
+            [
+                "c3bf74d5.281978"
+            ]
+        ]
+    },
+    {
+        "id": "c3bf74d5.281978",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT score.points, score.entityID, ent.name, ent.email\nFROM scoreboard score\nINNER JOIN entities ent ON\n    ent.entityID = score.entityID\nWHERE score.type = $type\nORDER BY score.points DESC",
+        "name": "Join scoreboard & entities",
+        "x": 910,
+        "y": 2120,
+        "wires": [
+            [
+                "8191441f.e0b788"
+            ]
+        ]
+    },
+    {
+        "id": "8191441f.e0b788",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1110,
+        "y": 2120,
+        "wires": [
+            [
+                "df1da06f.8218a"
+            ]
+        ]
+    },
+    {
+        "id": "df1da06f.8218a",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1260,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "8c8a6060.aeba6",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!msg.req.params.type) {\n        msg.error = 'Not a valid payload!';\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 2340,
+        "wires": [
+            [
+                "bae7d234.94097"
+            ]
+        ]
+    },
+    {
+        "id": "bae7d234.94097",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 2340,
+        "wires": [
+            [
+                "c450d924.8a8558"
+            ],
+            [
+                "53b29acc.6ab464"
+            ]
+        ]
+    },
+    {
+        "id": "53b29acc.6ab464",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 510,
+        "y": 2400,
+        "wires": []
+    },
+    {
+        "id": "c450d924.8a8558",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Set params for query",
+        "func": "msg.params = {\n    $type: msg.req.params.type\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 700,
+        "y": 2300,
+        "wires": [
+            [
+                "226988f3.e67328"
+            ]
+        ]
+    },
+    {
+        "id": "226988f3.e67328",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT score.points, score.entityID, ent.name, ent.email\nFROM scoreboard score\nINNER JOIN entities ent ON\n    ent.entityID = score.entityID\nWHERE score.type = $type\nORDER BY score.points DESC\nLIMIT 1",
+        "name": "Join scoreboard & entities",
+        "x": 930,
+        "y": 2300,
+        "wires": [
+            [
+                "c1e2264f.f426e8"
+            ]
+        ]
+    },
+    {
+        "id": "c1e2264f.f426e8",
+        "type": "json",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1130,
+        "y": 2300,
+        "wires": [
+            [
+                "6ce4e31f.7193bc"
+            ]
+        ]
+    },
+    {
+        "id": "6ce4e31f.7193bc",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1280,
+        "y": 2300,
+        "wires": []
+    },
+    {
+        "id": "5be4f204.8e0d5c",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/scoreboard/:type/leader",
+        "url": "/api/scoreboard/:type/leader",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 2340,
+        "wires": [
+            [
+                "8c8a6060.aeba6"
+            ]
+        ]
+    },
+    {
+        "id": "2f748658.8d3c5a",
+        "type": "ui_dropdown",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "label": "Category",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "d4445bc7.4401f8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "b7365e3f.82a25"
+            ]
+        ]
+    },
+    {
+        "id": "3956edde.df8362",
+        "type": "inject",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 60,
+        "wires": [
+            [
+                "64c7842a.56cb7c"
+            ]
+        ]
+    },
+    {
+        "id": "64c7842a.56cb7c",
+        "type": "http request",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://34.74.74.215:1902/api/getDistinctCategories",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 270,
+        "y": 60,
+        "wires": [
+            [
+                "e40f2a39.746368"
+            ]
+        ]
+    },
+    {
+        "id": "db00e920.964a88",
+        "type": "function",
+        "z": "2d4e6750.e69178",
+        "name": "Create array of options",
+        "func": "array = []\n\nfor(i=0; i<msg.payload.length; i++){\n    array.push(msg.payload[i].category)\n}\nmsg.payload = array;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 160,
+        "y": 120,
+        "wires": [
+            [
+                "a98c77da.ffb8f8"
+            ]
+        ]
+    },
+    {
+        "id": "e40f2a39.746368",
+        "type": "json",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 60,
+        "wires": [
+            [
+                "db00e920.964a88"
+            ]
+        ]
+    },
+    {
+        "id": "a98c77da.ffb8f8",
+        "type": "change",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "2f748658.8d3c5a"
+            ]
+        ]
+    },
+    {
+        "id": "b7365e3f.82a25",
+        "type": "function",
+        "z": "2d4e6750.e69178",
+        "name": "Set url for http req",
+        "func": "msg.url = 'http://34.74.74.215:1902/api/type/'+msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "b9e32863.ca3d48"
+            ]
+        ]
+    },
+    {
+        "id": "b9e32863.ca3d48",
+        "type": "http request",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "f9037caa.3ed48"
+            ]
+        ]
+    },
+    {
+        "id": "f9037caa.3ed48",
+        "type": "json",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 320,
+        "wires": [
+            [
+                "1014c1ae.f38bfe"
+            ]
+        ]
+    },
+    {
+        "id": "1014c1ae.f38bfe",
+        "type": "function",
+        "z": "2d4e6750.e69178",
+        "name": "Create array of options",
+        "func": "array = []\n\nfor(i=0; i<msg.payload.length; i++){\n    array.push(msg.payload[i].type)\n}\nmsg.payload = array;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 320,
+        "wires": [
+            [
+                "6edaf579.2d721c"
+            ]
+        ]
+    },
+    {
+        "id": "6edaf579.2d721c",
+        "type": "change",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "options",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "dfcf128f.3880b"
+            ]
+        ]
+    },
+    {
+        "id": "dfcf128f.3880b",
+        "type": "ui_dropdown",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "label": "Type",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "d4445bc7.4401f8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "5cdd125a.15f31c",
+                "12916749.6c7779"
+            ]
+        ]
+    },
+    {
+        "id": "5cdd125a.15f31c",
+        "type": "function",
+        "z": "2d4e6750.e69178",
+        "name": "Set url for http req",
+        "func": "msg.url = 'http://34.74.74.215:1902/api/scoreboard/'+msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 770,
+        "y": 380,
+        "wires": [
+            [
+                "ea24a526.627768"
+            ]
+        ]
+    },
+    {
+        "id": "ea24a526.627768",
+        "type": "http request",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 790,
+        "y": 460,
+        "wires": [
+            [
+                "e5c8c794.d02c78"
+            ]
+        ]
+    },
+    {
+        "id": "e5c8c794.d02c78",
+        "type": "json",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 950,
+        "y": 460,
+        "wires": [
+            [
+                "a0318989.966ba8"
+            ]
+        ]
+    },
+    {
+        "id": "7a6efa7c.38a8a4",
+        "type": "function",
+        "z": "2d4e6750.e69178",
+        "name": "Create msg for chart",
+        "func": "var points = msg.payload.points;\nvar name = msg.payload.name;\nmsg.payload = {};\nmsg.payload = points;\nmsg.label = name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 920,
+        "y": 600,
+        "wires": [
+            [
+                "179c0423.d1a21c"
+            ]
+        ]
+    },
+    {
+        "id": "179c0423.d1a21c",
+        "type": "ui_chart",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "group": "d9e34b20.a1d428",
+        "order": 1,
+        "width": "12",
+        "height": "12",
+        "label": "Donor Leader Scoreboard",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "No data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 950,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0318989.966ba8",
+        "type": "split",
+        "z": "2d4e6750.e69178",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 870,
+        "y": 520,
+        "wires": [
+            [
+                "7a6efa7c.38a8a4"
+            ]
+        ]
+    },
+    {
+        "id": "12916749.6c7779",
+        "type": "function",
+        "z": "2d4e6750.e69178",
+        "name": "Clear chart",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 580,
+        "wires": [
+            [
+                "179c0423.d1a21c"
+            ]
+        ]
+    },
+    {
+        "id": "74a3f239.9e468c",
+        "type": "comment",
+        "z": "dc4cb0ee.881d9",
+        "name": "PATH TO FINDMATCH",
+        "info": "",
+        "x": 120,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "6c45e758.a7a998",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/findmatch",
+        "url": "/api/findmatch",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 2520,
+        "wires": [
+            [
+                "d0b57b18.6f2dc8"
+            ]
+        ]
+    },
+    {
+        "id": "d0b57b18.6f2dc8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!(msg.payload.userID && msg.payload.materialCategory && msg.payload.materialSpecific \n    && msg.payload.quantity && msg.payload.needed && isNumber(msg.payload.radius)\n    && (msg.payload.needed.match('true') || msg.payload.needed.match('false')))) \n    {\n        msg.error = 'Not a valid payload!';\n    }\n\nfunction isNumber(n) {\n\n  var validFloat = function () {\n    if (n.match(/[\\.][0-9]/) === null || n.match(/[^0-9]/).length !== 1) {\n      return false;\n    } return true;\n      \n  };\n  return n.match(/[^0-9]/) === null ? true : validFloat();\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 2520,
+        "wires": [
+            [
+                "1963eeee.067311"
+            ]
+        ]
+    },
+    {
+        "id": "1963eeee.067311",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 2520,
+        "wires": [
+            [
+                "4fddc7c6.34d5f8"
+            ],
+            [
+                "d7ff1457.e14758"
+            ]
+        ]
+    },
+    {
+        "id": "faf3e87a.e41ac8",
+        "type": "comment",
+        "z": "824f57fd.e52648",
+        "name": "TODO: Review authorize method & params",
+        "info": "",
+        "x": 200,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d7ff1457.e14758",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 490,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "8e037696.e1e6c8",
+        "type": "link in",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "links": [
+            "4fddc7c6.34d5f8"
+        ],
+        "x": 155,
+        "y": 20,
+        "wires": [
+            [
+                "9d6145d1.829f28"
+            ]
+        ]
+    },
+    {
+        "id": "4fddc7c6.34d5f8",
+        "type": "link out",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "links": [
+            "8e037696.e1e6c8"
+        ],
+        "x": 615,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "9d6145d1.829f28",
+        "type": "function",
+        "z": "b20c5ac9.6e0c78",
+        "name": "Prepare msg for query",
+        "func": "msg.params = {\n    $entityID: msg.payload.userID\n}\nmsg.inputData = msg.payload;\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 180,
+        "y": 80,
+        "wires": [
+            [
+                "a46c0e35.2d6b5"
+            ]
+        ]
+    },
+    {
+        "id": "a46c0e35.2d6b5",
+        "type": "sqlite",
+        "z": "b20c5ac9.6e0c78",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT email, lat, lon, name FROM entities WHERE entityID = $entityID",
+        "name": "Get location of entity",
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "853a85a1.ca0e78"
+            ]
+        ]
+    },
+    {
+        "id": "853a85a1.ca0e78",
+        "type": "function",
+        "z": "b20c5ac9.6e0c78",
+        "name": "Prepare msg for query",
+        "func": "msg.client = {};\nmsg.client.id = msg.params.$entityID;\nmsg.client.email = msg.payload[0].email;\nmsg.client.lat = msg.payload[0].lat;\nmsg.client.lon = msg.payload[0].lon;\nmsg.client.name = msg.payload[0].name;\nmsg.client.category = msg.inputData.materialCategory;\nmsg.client.type = msg.inputData.materialSpecific;\nmsg.client.quantity = msg.inputData.quantity;\n\nmsg.payload = {};\nmsg.params = {};\n\nmsg.params = {\n    $category: msg.inputData.materialCategory,\n    $type: msg.inputData.materialSpecific,\n}\n\nif(msg.inputData.needed.match('true')) {\n    msg.params['$number'] = msg.inputData.quantity\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 160,
+        "y": 200,
+        "wires": [
+            [
+                "48112456.154fac"
+            ]
+        ]
+    },
+    {
+        "id": "4f2155c.a0313ac",
+        "type": "sqlite",
+        "z": "b20c5ac9.6e0c78",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT sup.entityID as id,sup.category, sup.type, sup.number as quantity, ent.name, ent.email, ent.lat,ent.lon\nFROM supplies sup\nINNER JOIN entities ent ON\n    ent.entityID = sup.entityID\nWHERE sup.category = $category AND sup.type = $type AND number >= $number\n",
+        "name": "Location of entities that meet requierements - supplies",
+        "x": 420,
+        "y": 260,
+        "wires": [
+            [
+                "985c8712.a1bb38"
+            ]
+        ]
+    },
+    {
+        "id": "b200bac4.5c06c8",
+        "type": "inject",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "x": 110,
+        "y": 660,
+        "wires": [
+            [
+                "55555df1.d284c4"
+            ]
+        ]
+    },
+    {
+        "id": "55555df1.d284c4",
+        "type": "template",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<iframe src=\"../worldmap\" height=650px width=750px></iframe>",
+        "x": 310,
+        "y": 660,
+        "wires": [
+            [
+                "404b334e.fd044c"
+            ]
+        ]
+    },
+    {
+        "id": "404b334e.fd044c",
+        "type": "ui_template",
+        "z": "dc4cb0ee.881d9",
+        "group": "7d74672d.ed3118",
+        "name": "",
+        "order": 1,
+        "width": "15",
+        "height": "14",
+        "format": "<div ng-bind-html=\"msg.payload | trusted\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 500,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c5fa26a4.0ae568",
+        "type": "http request",
+        "z": "dc4cb0ee.881d9",
+        "name": "CALL SUBMITMATERIAL",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://localhost:1902/api/submitMaterial",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 830,
+        "y": 260,
+        "wires": [
+            [
+                "9dba1cdb.95575",
+                "60755a68.59d864"
+            ]
+        ]
+    },
+    {
+        "id": "9dba1cdb.95575",
+        "type": "debug",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1050,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e228ed74.efcd2",
+        "type": "change",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload.radius",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "c5fa26a4.0ae568"
+            ]
+        ]
+    },
+    {
+        "id": "2657ccb6.04f8b4",
+        "type": "switch",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "property": "payload.search",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "e228ed74.efcd2"
+            ]
+        ]
+    },
+    {
+        "id": "4ee13a33.9e3f44",
+        "type": "switch",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "property": "payload.quantity",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "f4a6d715.8f1cc8",
+                "75c00e71.bf415"
+            ]
+        ]
+    },
+    {
+        "id": "14049b4a.c9f355",
+        "type": "comment",
+        "z": "dc4cb0ee.881d9",
+        "name": "If new quantity is 0 don't search for a match",
+        "info": "",
+        "x": 180,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "94eafe81.c4bd5",
+        "type": "debug",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 630,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "84abd190.2ea7d",
+        "type": "worldmap",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "OSM",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "true",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "path": "/worldmap",
+        "x": 1000,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "f4a6d715.8f1cc8",
+        "type": "http request",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://34.74.74.215:1902/api/findmatch",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 390,
+        "y": 420,
+        "wires": [
+            [
+                "c1d951f6.e9874"
+            ]
+        ]
+    },
+    {
+        "id": "856cea31.05f358",
+        "type": "json",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 790,
+        "y": 500,
+        "wires": [
+            [
+                "ef411c7d.d041b"
+            ]
+        ]
+    },
+    {
+        "id": "c1d951f6.e9874",
+        "type": "switch",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "404",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 480,
+        "wires": [
+            [
+                "94eafe81.c4bd5",
+                "4254f975.cd1568"
+            ],
+            [
+                "856cea31.05f358"
+            ]
+        ]
+    },
+    {
+        "id": "75c00e71.bf415",
+        "type": "function",
+        "z": "dc4cb0ee.881d9",
+        "name": "Empty map",
+        "func": "msg = {};\nmsg.payload ={};\nvar numOfLayers = flow.get('numOfLayers');\nmsg.payload.command1 = {command:{clear:\"client\" }};\n\nif(numOfLayers !== null) {\n    for(i = 0; i <= numOfLayers; i++) {\n        msg.payload[i] = {command:{clear:\"nearest_\"+i}};\n    }\n}\n\nmsg.payload[i+1] = {command:{clear:\"line\"}};\nmsg.payload[i+2] = {command:{clear:\"Search Area\"}};\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 540,
+        "wires": [
+            [
+                "c0dfceb3.6005a"
+            ]
+        ]
+    },
+    {
+        "id": "c0dfceb3.6005a",
+        "type": "split",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 610,
+        "y": 580,
+        "wires": [
+            [
+                "84abd190.2ea7d"
+            ]
+        ]
+    },
+    {
+        "id": "c748a741.faf3b8",
+        "type": "ui_toast",
+        "z": "dc4cb0ee.881d9",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 910,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4254f975.cd1568",
+        "type": "function",
+        "z": "dc4cb0ee.881d9",
+        "name": "Show notification",
+        "func": "msg.topic = 'No match!';\nmsg.payload = {};\nmsg.payload = 'No match found!. Please increase your search radius or standby for new supplies/resources'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 790,
+        "y": 440,
+        "wires": [
+            [
+                "c748a741.faf3b8"
+            ]
+        ]
+    },
+    {
+        "id": "aaf14e1c.e1b9f",
+        "type": "debug",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1070,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "60755a68.59d864",
+        "type": "function",
+        "z": "dc4cb0ee.881d9",
+        "name": "Show notification",
+        "func": "msg.topic = 'Updated!';\nmsg.payload = {};\nmsg.payload = 'New supplies/demand are saved! Thank you!'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 200,
+        "wires": [
+            [
+                "6025d6f3.4d3098"
+            ]
+        ]
+    },
+    {
+        "id": "6025d6f3.4d3098",
+        "type": "ui_toast",
+        "z": "dc4cb0ee.881d9",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1110,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "48112456.154fac",
+        "type": "switch",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "property": "inputData.needed",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "true",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "4f2155c.a0313ac"
+            ],
+            [
+                "73e2579f.5d6bb8"
+            ]
+        ]
+    },
+    {
+        "id": "73e2579f.5d6bb8",
+        "type": "sqlite",
+        "z": "b20c5ac9.6e0c78",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT dem.entityID as id,dem.category, dem.type, dem.number as quantity, ent.name, ent.email, ent.lat, ent.lon\nFROM demands dem\nINNER JOIN entities ent ON\n    ent.entityID = dem.entityID\nWHERE dem.category = $category AND dem.type = $type AND dem.number > 0\n",
+        "name": "Location of entities that meet requierements - demands",
+        "x": 300,
+        "y": 380,
+        "wires": [
+            [
+                "985c8712.a1bb38"
+            ]
+        ]
+    },
+    {
+        "id": "2c87854f.e599fa",
+        "type": "comment",
+        "z": "b20c5ac9.6e0c78",
+        "name": "Why use switch?",
+        "info": "https://www.sqlite.org/cintro.html\n\nChapter 6: SQLite allows a parameter wherever a string literal, numeric constant, or NULL is allowed. \n(**Parameters may not be used for column or table names.**)",
+        "x": 320,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "90e613ec.fbd7",
+        "type": "function",
+        "z": "b20c5ac9.6e0c78",
+        "name": "Set status code to 404",
+        "func": "msg.res.status = 404;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 420,
+        "wires": [
+            [
+                "582e562d.4faef8"
+            ]
+        ]
+    },
+    {
+        "id": "81a7979f.7d8eb8",
+        "type": "function",
+        "z": "b20c5ac9.6e0c78",
+        "name": "Find nearest match",
+        "func": "/* Find nearest match based on Haversine formula\nhttps://www.movable-type.co.uk/scripts/latlong.html*/\n\nconst R = 6371e3;\nvar baseLat = msg.client.lat;\nvar baseLon = msg.client.lon;\nvar dist = [[]];\nvar j = 0;\n\nfor(i = 0; i < msg.payload.length; i++) {\n    d = calcDistance(baseLat, baseLon, msg.payload[i].lat, msg.payload[i].lon);\n    if(d <= msg.inputData.radius * 1000){\n        msg.found = true;\n        dist[j] = [];\n        dist[j][0] = i;\n        dist[j][1] = d;\n        j++;\n    }\n}\ndist.sort(secondColumn);\nmsg.matches = [[]];\nif(msg.found) {\n    for(i = 0; i < dist.length; i++) {\n        msg.matches[i] = msg.payload[dist[i][0]];\n        msg.matches[i].distance = Math.round(dist[i][1]);\n    }\n}\nreturn msg;\n\nfunction calcDistance(lat1, lon1, lat2, lon2){\n    var R = 6378.137; // Radius of earth in KM\n    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;\n    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;\n    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +\n    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *\n    Math.sin(dLon/2) * Math.sin(dLon/2);\n    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));\n    var d = R * c;\n    return d * 1000; // meters\n}\n\nfunction secondColumn(a, b) {\n    if (a[1] === b[1]) {\n        return 0;\n    }\n    else {\n        return (a[1] < b[1]) ? -1 : 1;\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 750,
+        "y": 320,
+        "wires": [
+            [
+                "2486dae7.0f7866",
+                "f3fbea3e.572378"
+            ]
+        ]
+    },
+    {
+        "id": "985c8712.a1bb38",
+        "type": "switch",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 360,
+        "wires": [
+            [
+                "81a7979f.7d8eb8"
+            ],
+            [
+                "90e613ec.fbd7"
+            ]
+        ]
+    },
+    {
+        "id": "2486dae7.0f7866",
+        "type": "switch",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "property": "found",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1010,
+        "y": 320,
+        "wires": [
+            [
+                "fc9e8c81.ac5a2"
+            ],
+            [
+                "2447af9e.e0cb4"
+            ]
+        ]
+    },
+    {
+        "id": "2447af9e.e0cb4",
+        "type": "function",
+        "z": "b20c5ac9.6e0c78",
+        "name": "Prepare response",
+        "func": "msg.payload = {};\nmsg.payload.client = msg.client;\nmsg.payload.matches = msg.matches;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 930,
+        "y": 380,
+        "wires": [
+            [
+                "aa196744.446588"
+            ]
+        ]
+    },
+    {
+        "id": "2fa9f25f.a1649e",
+        "type": "http response",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1300,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "aa196744.446588",
+        "type": "json",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1130,
+        "y": 380,
+        "wires": [
+            [
+                "2fa9f25f.a1649e"
+            ]
+        ]
+    },
+    {
+        "id": "e464f8c3.c3f958",
+        "type": "http response",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "statusCode": "404",
+        "headers": {},
+        "x": 1060,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "582e562d.4faef8",
+        "type": "template",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "404: Not found",
+        "output": "str",
+        "x": 880,
+        "y": 460,
+        "wires": [
+            [
+                "e464f8c3.c3f958"
+            ]
+        ]
+    },
+    {
+        "id": "fc9e8c81.ac5a2",
+        "type": "function",
+        "z": "b20c5ac9.6e0c78",
+        "name": "Set status code to 404",
+        "func": "msg.res.status = 404;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1000,
+        "y": 260,
+        "wires": [
+            [
+                "f47b8c6f.4634b"
+            ]
+        ]
+    },
+    {
+        "id": "3f783938.51ebb6",
+        "type": "http response",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "statusCode": "404",
+        "headers": {},
+        "x": 1200,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f47b8c6f.4634b",
+        "type": "template",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "404: Not found",
+        "output": "str",
+        "x": 1200,
+        "y": 260,
+        "wires": [
+            [
+                "3f783938.51ebb6"
+            ]
+        ]
+    },
+    {
+        "id": "ef411c7d.d041b",
+        "type": "function",
+        "z": "dc4cb0ee.881d9",
+        "name": "Prepare data for map",
+        "func": "var mapInfo = [];\nmapInfo[0] = msg.payload.client;\nvar j =1;\n\nif (msg.payload.client.category===\"Human Resources\"){\n    mapInfo[0].icon=\"fa-user-md\";\n    }\n    \nif (msg.payload.client.category===\"Facilities\"){\n    mapInfo[0].icon=\"fa-building\";\n    }\n\nif (msg.payload.client.category===\"Research Data\"){\n    mapInfo[0].icon=\"fa-database\";\n    }\n    \nif(msg.needed) {\n    mapInfo[0].iconColor=\"red\";\n    mapInfo[0].status=\"IN NEED\";\n    mapInfo[0].layer = 'client';\n    \n    // Scan array the other way around so [0] will go on last position of mapInfo\n    for(i = msg.payload.matches.length - 1; i >= 0; i--) { \n        mapInfo[j] = msg.payload.matches[i];\n        mapInfo[j].distance = Math.round(mapInfo[j].distance/1000)+'km'\n        mapInfo[j].iconColor=\"green\";\n        mapInfo[j].status=\"AVAILABLE\";\n        mapInfo[j].layer = 'nearest_'+i;\n        if (msg.payload.matches[i].category===\"Human Resources\"){\n            mapInfo[j].icon=\"fa-user-md\";\n            }\n\n        if (msg.payload.matches[i].category===\"Facilities\"){\n            mapInfo[j].icon=\"fa-building\";\n        }\n\n        if (msg.payload.matches[i].category===\"Research Data\"){\n            mapInfo[j].icon=\"fa-database\";\n        }\n        j++;\n    }\n} else {\n    mapInfo[0].iconColor=\"green\";\n    mapInfo[0].status=\"AVAILABLE\";\n    mapInfo[0].layer = 'nearest';\n    \n    for(i = msg.payload.matches.length - 1; i >= 0; i--) {\n        mapInfo[j] = msg.payload.matches[i];\n        mapInfo[j].distance = Math.round(mapInfo[j].distance/1000)+'km'\n        mapInfo[j].iconColor=\"red\";\n        mapInfo[j].status=\"IN NEED\";\n        mapInfo[j].layer = 'client'+i;\n        if (msg.payload.matches[i].category===\"Human Resources\"){\n            mapInfo[j].icon=\"fa-user-md\";\n        }\n\n        if (msg.payload.matches[i].category===\"Facilities\"){\n            mapInfo[j].icon=\"fa-building\";\n        }\n\n        if (msg.payload.matches[i].category===\"Research Data\"){\n            mapInfo[j].icon=\"fa-database\";\n        }\n        j++;\n    }\n}\n\nmapInfo[j] = {};\nmapInfo[j].name = 'line';\nmapInfo[j].layer = 'line';\nmapInfo[j].color = 'black';\nmapInfo[j].dashArray = [10,10];\nmapInfo[j].line = [\n    [msg.payload.client.lat,msg.payload.client.lon],\n    [msg.payload.matches[0].lat,msg.payload.matches[0].lon]\n    ];\nmapInfo[j+1] = {\"name\":\"Search Area\", \n                \"lat\":msg.payload.client.lat, \n                \"lon\":msg.payload.client.lon, \n                \"radius\":parseInt(msg.radius*1000),\n                \"opacity\": 0.3,\n                \"fillOpacity\": 0.1,\n                \"layer\": \"Search Area\"\n                }\n\nflow.set('numOfLayers', msg.payload.matches.length); // Num of layers to delete on next map update\nmsg.payload = {};\nmsg.payload = mapInfo;\nreturn msg;\n\n\n\n\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 980,
+        "y": 500,
+        "wires": [
+            [
+                "f93c2e82.9e264",
+                "aaf14e1c.e1b9f"
+            ]
+        ]
+    },
+    {
+        "id": "f93c2e82.9e264",
+        "type": "split",
+        "z": "dc4cb0ee.881d9",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1170,
+        "y": 500,
+        "wires": [
+            [
+                "84abd190.2ea7d"
+            ]
+        ]
+    },
+    {
+        "id": "f3fbea3e.572378",
+        "type": "debug",
+        "z": "b20c5ac9.6e0c78",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 750,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "48be8ff4.80f68",
+        "type": "http in",
+        "z": "824f57fd.e52648",
+        "name": "/api/accept-transaction",
+        "url": "/api/accept-transaction",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 2700,
+        "wires": [
+            [
+                "c319799d.d0d5a8"
+            ]
+        ]
+    },
+    {
+        "id": "c319799d.d0d5a8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Check data",
+        "func": "if (!(msg.payload.clientID && msg.payload.supplierID && msg.payload.category \n    && msg.payload.type && !(isNaN(msg.payload.quantity)) )) \n    {\n        msg.error = 'Not a valid payload!';\n    }\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 2700,
+        "wires": [
+            [
+                "901b0244.71f11"
+            ]
+        ]
+    },
+    {
+        "id": "901b0244.71f11",
+        "type": "switch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "property": "error",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 530,
+        "y": 2700,
+        "wires": [
+            [
+                "4074056f.29921c"
+            ],
+            [
+                "5daae27d.a3bf1c"
+            ]
+        ]
+    },
+    {
+        "id": "5daae27d.a3bf1c",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 490,
+        "y": 2760,
+        "wires": []
+    },
+    {
+        "id": "4074056f.29921c",
+        "type": "link out",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "links": [
+            "bc805b75.0a2218"
+        ],
+        "x": 675,
+        "y": 2680,
+        "wires": []
+    },
+    {
+        "id": "188339d6.2c63a6",
+        "type": "catch",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "scope": [
+            "5e510776.2793e8",
+            "a081abd0.768978",
+            "b17d9e4c.10a89",
+            "718ab042.980cd",
+            "d578ab0e.038ac8",
+            "35a8612b.3a2e6e",
+            "f2a7374f.e1a2a8",
+            "6c7e2735.01ca88",
+            "dd2af307.deb99",
+            "ef42c5fb.0670a8",
+            "8c8a6060.aeba6",
+            "d0b57b18.6f2dc8",
+            "c319799d.d0d5a8"
+        ],
+        "uncaught": false,
+        "x": 920,
+        "y": 40,
+        "wires": [
+            [
+                "b990e188.4504f"
+            ]
+        ]
+    },
+    {
+        "id": "b990e188.4504f",
+        "type": "subflow:bf3352cf.16016",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "x": 1170,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "bc805b75.0a2218",
+        "type": "link in",
+        "z": "73394179.dad4d",
+        "name": "",
+        "links": [
+            "4074056f.29921c"
+        ],
+        "x": 155,
+        "y": 40,
+        "wires": [
+            [
+                "aa3da907.d23318"
+            ]
+        ]
+    },
+    {
+        "id": "aa3da907.d23318",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Prepare data",
+        "func": "msg.reqInput = msg.payload;\nmsg.params = {\n    $clientID: msg.payload.clientID,\n    $category: msg.payload.category,\n    $type: msg.payload.type,\n    $quantity: msg.payload.quantity\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "84458d04.59861"
+            ]
+        ]
+    },
+    {
+        "id": "84458d04.59861",
+        "type": "sqlite",
+        "z": "73394179.dad4d",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT number as clientRequest\nFROM demands \nWHERE entityID = $clientID \nAND category = $category\nAND type = $type\nAND number >= $quantity",
+        "name": "Get demand data",
+        "x": 330,
+        "y": 100,
+        "wires": [
+            [
+                "9da5b708.52d688"
+            ]
+        ]
+    },
+    {
+        "id": "396bb013.5c8b4",
+        "type": "comment",
+        "z": "73394179.dad4d",
+        "name": "Notes",
+        "info": " - Client cannot make a deal with more supplies than the ones that are already defined at Demands table \n - Supplier cannot offer more supplies than his stock which is defined at Supplies table\n - If transaction is completed points will be given to supplier",
+        "x": 1090,
+        "y": 60,
+        "wires": []
     },
     {
         "id": "62282989.aeaab8",
@@ -229,6 +5723,22 @@
             [
                 "64622c58.87f724",
                 "1c37c9ea.cf46f6"
+            ]
+        ]
+    },
+    {
+        "id": "fe1b405.ccc9fc",
+        "type": "function",
+        "z": "488f98b4.ed0e28",
+        "name": "get location from entity id",
+        "func": "\n//info in msg.payload.entityID\n\nmsg.info=msg.payload;\n\nmsg.topic='select name,email,contact_info,lat,lon from entities where entityID='+msg.payload.entityID; \n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "47cea5f0.50df8c"
             ]
         ]
     },
@@ -504,6 +6014,454 @@
         ]
     },
     {
+        "id": "91fce16e.8c7b5",
+        "type": "http response",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "statusCode": "201",
+        "headers": {},
+        "x": 1420,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5de8b366.a7720c",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT entityID FROM entities WHERE email = $email",
+        "name": "Get new ID",
+        "x": 1030,
+        "y": 560,
+        "wires": [
+            [
+                "fb4d76c1.bc7ea8"
+            ]
+        ]
+    },
+    {
+        "id": "fb4d76c1.bc7ea8",
+        "type": "function",
+        "z": "824f57fd.e52648",
+        "name": "Create response",
+        "func": "msg.res.status = 201;\nvar id = msg.payload[0].entityID;\nmsg.paylaod = {};\nmsg.payload.ID = id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1230,
+        "y": 560,
+        "wires": [
+            [
+                "91fce16e.8c7b5",
+                "7f19bb77.bb5844"
+            ]
+        ]
+    },
+    {
+        "id": "9da5b708.52d688",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Check client demand",
+        "func": "if (msg.payload.length > 0) {\n    msg.client = {};\n    msg.client.id = msg.params.$clientID;\n    msg.client.currentDemand = msg.payload[0].clientRequest;\n    msg.payload = {};\n    delete msg.params.$clientID;\n    msg.params['$supplierID'] = msg.reqInput.supplierID;\n} else {\n    msg.clientError = 'Invalid demand';\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "93f5ae66.4b5a4"
+            ]
+        ]
+    },
+    {
+        "id": "93f5ae66.4b5a4",
+        "type": "switch",
+        "z": "73394179.dad4d",
+        "name": "",
+        "property": "clientError",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "6f4801ef.588cf"
+            ],
+            [
+                "1c6ad2b4.6028ed"
+            ]
+        ]
+    },
+    {
+        "id": "1c6ad2b4.6028ed",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Set status code to 422",
+        "func": "msg.res.status = 422;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "32db9079.9dd91"
+            ]
+        ]
+    },
+    {
+        "id": "32db9079.9dd91",
+        "type": "template",
+        "z": "73394179.dad4d",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "422: Demand either zero or smaller than requested quantity",
+        "output": "str",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "cbd753cb.00355"
+            ]
+        ]
+    },
+    {
+        "id": "cbd753cb.00355",
+        "type": "http response",
+        "z": "73394179.dad4d",
+        "name": "",
+        "statusCode": "422",
+        "headers": {},
+        "x": 300,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "6f4801ef.588cf",
+        "type": "sqlite",
+        "z": "73394179.dad4d",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT number as supplies\nFROM supplies \nWHERE entityID = $supplierID\nAND category = $category\nAND type = $type\nAND number >= $quantity",
+        "name": "Get supply data",
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "c40f307c.5172c"
+            ]
+        ]
+    },
+    {
+        "id": "c40f307c.5172c",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Check supplier",
+        "func": "if (msg.payload.length > 0) {\n    msg.supplier = {};\n    msg.supplier.id = msg.params.$supplierID;\n    msg.supplier.currentSupplies = msg.payload[0].supplies;\n    msg.payload = {};\n} else {\n    msg.supplierError = 'Invalid supplies';\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 80,
+        "wires": [
+            [
+                "f3c27f69.60dc"
+            ]
+        ]
+    },
+    {
+        "id": "f3c27f69.60dc",
+        "type": "switch",
+        "z": "73394179.dad4d",
+        "name": "",
+        "property": "supplierError",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "undefined",
+                "vt": "undefined"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 710,
+        "y": 140,
+        "wires": [
+            [
+                "e4d7ed5d.55799"
+            ],
+            [
+                "8e47078a.265198"
+            ]
+        ]
+    },
+    {
+        "id": "8e47078a.265198",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Set status code to 422",
+        "func": "msg.res.status = 422;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "5537443e.edac4c"
+            ]
+        ]
+    },
+    {
+        "id": "5537443e.edac4c",
+        "type": "template",
+        "z": "73394179.dad4d",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "422: Not enough supplies to complete request",
+        "output": "str",
+        "x": 520,
+        "y": 260,
+        "wires": [
+            [
+                "e6d3dab.2bba228"
+            ]
+        ]
+    },
+    {
+        "id": "e6d3dab.2bba228",
+        "type": "http response",
+        "z": "73394179.dad4d",
+        "name": "",
+        "statusCode": "422",
+        "headers": {},
+        "x": 520,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "4b88314a.99a8b",
+        "type": "debug",
+        "z": "73394179.dad4d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 910,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "e4d7ed5d.55799",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Data for new supplies",
+        "func": "delete msg.params.$quantity;\nmsg.params['$newSupplies'] = msg.supplier.currentSupplies - msg.reqInput.quantity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 900,
+        "y": 120,
+        "wires": [
+            [
+                "58324617.c9dac8"
+            ]
+        ]
+    },
+    {
+        "id": "58324617.c9dac8",
+        "type": "sqlite",
+        "z": "73394179.dad4d",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO supplies(category, type, number, entityID) \nvalues($category, $type, $newSupplies, $supplierID)",
+        "name": "Update supplies",
+        "x": 930,
+        "y": 180,
+        "wires": [
+            [
+                "804ee3c1.eb637"
+            ]
+        ]
+    },
+    {
+        "id": "804ee3c1.eb637",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Data for new demand",
+        "func": "delete msg.params['$supplierID'];\ndelete msg.params['$newSupplies'];\nmsg.params['$clientID'] = msg.client.id;\nmsg.params['$newDemand'] = msg.client.currentDemand - msg.reqInput.quantity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 880,
+        "y": 240,
+        "wires": [
+            [
+                "96cc7a37.c4aec8"
+            ]
+        ]
+    },
+    {
+        "id": "96cc7a37.c4aec8",
+        "type": "sqlite",
+        "z": "73394179.dad4d",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO demands(category, type, number, entityID) \nvalues($category, $type, $newDemand, $clientID)",
+        "name": "Update demand",
+        "x": 820,
+        "y": 300,
+        "wires": [
+            [
+                "57b0cf39.ddf16"
+            ]
+        ]
+    },
+    {
+        "id": "57b0cf39.ddf16",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Set params for query",
+        "func": "delete msg.params.$clientID;\ndelete msg.params.$newDemand;\nmsg.params['$supplierID'] = msg.supplier.id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 740,
+        "y": 360,
+        "wires": [
+            [
+                "2c74a93.775d956"
+            ]
+        ]
+    },
+    {
+        "id": "2c74a93.775d956",
+        "type": "sqlite",
+        "z": "73394179.dad4d",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "SELECT points FROM SCOREBOARD WHERE entityID = $supplierID AND category = $category AND type = $type",
+        "name": "Get current points",
+        "x": 710,
+        "y": 420,
+        "wires": [
+            [
+                "f16271f2.93cca"
+            ]
+        ]
+    },
+    {
+        "id": "f16271f2.93cca",
+        "type": "function",
+        "z": "73394179.dad4d",
+        "name": "Calculate new points",
+        "func": "if(msg.payload.length > 0) {\n    msg.params['$points'] = msg.payload[0].points + parseInt(msg.reqInput.quantity);\n} else {\n    msg.params['$points'] = msg.reqInput.quantity;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 700,
+        "y": 480,
+        "wires": [
+            [
+                "6b13a80a.33c0d8"
+            ]
+        ]
+    },
+    {
+        "id": "6b13a80a.33c0d8",
+        "type": "sqlite",
+        "z": "73394179.dad4d",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO scoreboard(entityID, points, category, type) \nvalues($supplierID, $points, $category, $type)",
+        "name": "Insert new points",
+        "x": 690,
+        "y": 540,
+        "wires": [
+            [
+                "4b88314a.99a8b",
+                "de510fd.72d5cf"
+            ]
+        ]
+    },
+    {
+        "id": "7f044c66.987f74",
+        "type": "http response",
+        "z": "73394179.dad4d",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 600,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "de510fd.72d5cf",
+        "type": "template",
+        "z": "73394179.dad4d",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "200: OK",
+        "output": "str",
+        "x": 640,
+        "y": 600,
+        "wires": [
+            [
+                "7f044c66.987f74"
+            ]
+        ]
+    },
+    {
+        "id": "d3275d8f.d8d19",
+        "type": "sqlite",
+        "z": "824f57fd.e52648",
+        "mydb": "8713b1a6.c3ea6",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO supplies (category, type, number, entityID) values($materialCategory, $materialSpecific, $quantity, $userID)",
+        "name": "Supplies",
+        "x": 960,
+        "y": 920,
+        "wires": [
+            [
+                "5e67a6a0.6b4b78"
+            ]
+        ]
+    },
+    {
+        "id": "7f19bb77.bb5844",
+        "type": "link out",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "links": [
+            "f54cda23.f45668"
+        ],
+        "x": 1360,
+        "y": 480,
+        "wires": []
+    },
+    {
         "id": "f59a0f55.102bb",
         "type": "debug",
         "z": "82736b0e.73c378",
@@ -530,6 +6488,58 @@
             [
                 "e3bcfd07.f634b",
                 "99751125.6330c"
+            ]
+        ]
+    },
+    {
+        "id": "7e273d55.af9564",
+        "type": "google geocoding",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "geocodeBy": "coordinates",
+        "address": "",
+        "lat": "",
+        "lon": "",
+        "googleAPI": "af08e722.542d88",
+        "bounds": "",
+        "language": "",
+        "region": "",
+        "components": "",
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "cda57770.697e98",
+                "4281baee.baf174"
+            ]
+        ]
+    },
+    {
+        "id": "47cea5f0.50df8c",
+        "type": "subflow:c3338301.aaa24",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "b3b0e05b.c5499"
+            ]
+        ]
+    },
+    {
+        "id": "b3b0e05b.c5499",
+        "type": "function",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "func": "\nmsg.location={};\nmsg.location.lat=msg.payload[0].lat;\nmsg.location.lon=msg.payload[0].lon;\n\n\nmsg.name=msg.payload[0].name;\nmsg.contact_info=msg.payload[0].contact_info;\nmsg.email=msg.payload[0].email;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 120,
+        "wires": [
+            [
+                "7e273d55.af9564"
             ]
         ]
     },
@@ -585,6 +6595,35 @@
         ]
     },
     {
+        "id": "cda57770.697e98",
+        "type": "function",
+        "z": "488f98b4.ed0e28",
+        "name": "extract city country",
+        "func": "var i=0;\nfor (i=0;i<msg.data.results[0].address_components.length;i++) {\n    if ((msg.data.results[0].address_components[i].types[0]===\"administrative_area_level_2\")){\n        msg.city=msg.data.results[0].address_components[i].short_name;\n        //console.log(\"FOUND CITY:\"+msg.city);\n    }\n    if ((msg.data.results[0].address_components[i].types[0]===\"country\")){\n        msg.country=msg.data.results[0].address_components[i].short_name;\n        //console.log(\"FOUND CITY:\"+msg.city);\n    }\n    //console.log(\"external loop:\"+i);\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 790,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4281baee.baf174",
+        "type": "debug",
+        "z": "488f98b4.ed0e28",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 670,
+        "y": 280,
+        "wires": []
+    },
+    {
         "id": "b057969a.4143e8",
         "type": "function",
         "z": "82736b0e.73c378",
@@ -599,6 +6638,18 @@
                 "42514bd4.78d2f4"
             ]
         ]
+    },
+    {
+        "id": "58a83591.ba72fc",
+        "type": "link out",
+        "z": "824f57fd.e52648",
+        "name": "",
+        "links": [
+            "62282989.aeaab8"
+        ],
+        "x": 240,
+        "y": 960,
+        "wires": []
     },
     {
         "id": "1c37c9ea.cf46f6",
@@ -659,18 +6710,562 @@
         "wires": []
     },
     {
-        "id": "d9b7ef9f.d8ba",
-        "type": "amqp-server",
-        "z": "",
-        "host": "localhost",
-        "port": "5672",
-        "vhost": "resourcefinder",
-        "keepalive": "30",
-        "usetls": false,
-        "verifyservercert": true,
-        "useca": false,
-        "ca": "",
-        "usetopology": false,
-        "topology": "{\n\t\"exchanges\": [\n\t\t{\"name\": \"exchange1\", \"type\": \"direct\", \"options\": {\"durable\": false}},\n\t\t{\"name\": \"exchange2\"}\n\t],\n\t\"queues\": [\n\t\t{\"name\": \"queue1\", \"options\": {\"messageTtl\": 60000}},\n\t\t{\"name\": \"queue2\"}\n\t],\n\t\"bindings\": [\n\t\t{\"source\": \"exchange1\", \"queue\": \"queue1\", \"pattern\": \"debug\", \"args\": {}},\n\t\t{\"source\": \"exchange1\", \"exchange\": \"exchange2\", \"pattern\": \"error\"},\n\t\t{\"source\": \"exchange2\", \"queue\": \"queue2\"}\n\t]\n}"
+        "id": "10bccddf.446e32",
+        "type": "inject",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "4964ee56.298aa"
+            ]
+        ]
+    },
+    {
+        "id": "4964ee56.298aa",
+        "type": "http request",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://34.74.74.215:1902/api/getDistinctCategories",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 310,
+        "y": 100,
+        "wires": [
+            [
+                "99206cfe.6ff9b"
+            ]
+        ]
+    },
+    {
+        "id": "99206cfe.6ff9b",
+        "type": "json",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "e4db49cb.ddd628"
+            ]
+        ]
+    },
+    {
+        "id": "d4c02dc.0aba2d",
+        "type": "ui_dropdown",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "label": "Category drop down",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "9709a53f.d2fac8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 540,
+        "y": 60,
+        "wires": [
+            [
+                "a925137d.8f607"
+            ]
+        ]
+    },
+    {
+        "id": "e4db49cb.ddd628",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Create msg for dropdown",
+        "func": "array = []\n\nfor(i=0; i<msg.payload.length; i++){\n    array.push(msg.payload[i].category)\n}\nmsg.options=array\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "d4c02dc.0aba2d"
+            ]
+        ]
+    },
+    {
+        "id": "a925137d.8f607",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Prepate url",
+        "func": "//flow.set('category',msg.payload);\nmsg.url = 'http://34.74.74.215:1902/api/type/'+msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 750,
+        "y": 60,
+        "wires": [
+            [
+                "b831bf1.26a1f4"
+            ]
+        ]
+    },
+    {
+        "id": "b831bf1.26a1f4",
+        "type": "http request",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "632c4294.c26e0c"
+            ]
+        ]
+    },
+    {
+        "id": "632c4294.c26e0c",
+        "type": "json",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 710,
+        "y": 120,
+        "wires": [
+            [
+                "8fb9b916.c2b548"
+            ]
+        ]
+    },
+    {
+        "id": "50efbb80.9537e4",
+        "type": "ui_dropdown",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "label": "Type drop down",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "9709a53f.d2fac8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "a7697f79.c1365",
+                "62f85ad6.796e74",
+                "3c29f06.bc34e1"
+            ]
+        ]
+    },
+    {
+        "id": "8fb9b916.c2b548",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Create msg for dropdown",
+        "func": "array = []\n\nfor(i=0; i<msg.payload.length; i++){\n    array.push(msg.payload[i].type)\n}\nmsg.options=array\nmsg.payload = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 890,
+        "y": 120,
+        "wires": [
+            [
+                "50efbb80.9537e4"
+            ]
+        ]
+    },
+    {
+        "id": "46af14c6.9a7bcc",
+        "type": "comment",
+        "z": "7110272b.243dd8",
+        "name": "Initialize category & type",
+        "info": "",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a7697f79.c1365",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Demand call",
+        "func": "msg.url = 'http://34.74.74.215:1902/api/demands/'+msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "1017883f.82b5e8"
+            ]
+        ]
+    },
+    {
+        "id": "62f85ad6.796e74",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Supply call",
+        "func": "msg.url = 'http://34.74.74.215:1902/api/supplies/'+msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 750,
+        "y": 180,
+        "wires": [
+            [
+                "42ee26df.6d69f8"
+            ]
+        ]
+    },
+    {
+        "id": "1017883f.82b5e8",
+        "type": "http request",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 670,
+        "y": 300,
+        "wires": [
+            [
+                "d4454cb1.9fe76"
+            ]
+        ]
+    },
+    {
+        "id": "42ee26df.6d69f8",
+        "type": "http request",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 930,
+        "y": 180,
+        "wires": [
+            [
+                "2cd9a1ce.aaad2e"
+            ]
+        ]
+    },
+    {
+        "id": "f71a3836.316da8",
+        "type": "ui_gauge",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "group": "2df41663.db70ba",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Demand",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 880,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "aa9e2916.e88a88",
+        "type": "ui_gauge",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "group": "2df41663.db70ba",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Supply",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1150,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "d4454cb1.9fe76",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Filter response",
+        "func": "temp=JSON.parse(msg.payload)\nif(temp[0].demand === null){\n    msg.payload= 0\n}else{\n    msg.payload= temp[0].demand\n}\nmsg.topic='Demand';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 880,
+        "y": 300,
+        "wires": [
+            [
+                "f71a3836.316da8",
+                "766bc94b.1f4a48"
+            ]
+        ]
+    },
+    {
+        "id": "2cd9a1ce.aaad2e",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Filter response",
+        "func": "temp=JSON.parse(msg.payload)\nif(temp[0].supplies === null){\n    msg.payload= 0\n}else{\n    msg.payload= temp[0].supplies\n}\nmsg.topic='Supplies';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1060,
+        "y": 240,
+        "wires": [
+            [
+                "aa9e2916.e88a88",
+                "766bc94b.1f4a48"
+            ]
+        ]
+    },
+    {
+        "id": "766bc94b.1f4a48",
+        "type": "ui_chart",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "group": "ebe7bc18.1676d",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Demand & Supply chart",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 1150,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3c29f06.bc34e1",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Save type to flow var",
+        "func": "flow.set(\"type\",msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c531f8f3.67e0d8",
+        "type": "http request",
+        "z": "7110272b.243dd8",
+        "name": "Get demand by ID",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 490,
+        "y": 460,
+        "wires": [
+            [
+                "61d3f8da.0fdf78"
+            ]
+        ]
+    },
+    {
+        "id": "1529330d.2e03dd",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "filter output and give final response",
+        "func": "//var temp = JSON.parse(msg.payload)\n// msg.demand = msg.payload[0];\n// msg.payload = {};\n// var id = flow.get(\"id\");\n// msg.payload=[{\n// \"data\": [msg.demand],\n// \"labels\": [\"EntityId = \"+id]\n// }]\nvar temp = msg.payload[0].demand;\nif(temp === null) {\n    temp = 0;\n}\nmsg.payload = {};\nmsg.payload = temp;\nmsg.label = \"ID:\"+flow.get(\"id\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "276367ef.d024c8",
+                "c3865a81.919ee8"
+            ]
+        ]
+    },
+    {
+        "id": "276367ef.d024c8",
+        "type": "debug",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 830,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "2a084031.5a13b",
+        "type": "ui_text_input",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "label": "Entity ID",
+        "tooltip": "",
+        "group": "9709a53f.d2fac8",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "mode": "text",
+        "delay": "0",
+        "topic": "",
+        "x": 100,
+        "y": 460,
+        "wires": [
+            [
+                "bf9cd93e.0c27e8"
+            ]
+        ]
+    },
+    {
+        "id": "61d3f8da.0fdf78",
+        "type": "json",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 670,
+        "y": 460,
+        "wires": [
+            [
+                "1529330d.2e03dd"
+            ]
+        ]
+    },
+    {
+        "id": "c3865a81.919ee8",
+        "type": "ui_gauge",
+        "z": "7110272b.243dd8",
+        "name": "",
+        "group": "9709a53f.d2fac8",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "gtype": "gage",
+        "title": "Current Demand for ID",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 700,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "bf9cd93e.0c27e8",
+        "type": "function",
+        "z": "7110272b.243dd8",
+        "name": "Prepare url",
+        "func": "flow.set(\"id\", msg.payload);\nvar type = flow.get(\"type\");\nmsg.url = 'http://34.74.74.215:1902/api/demands/'+type+'/'+msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 290,
+        "y": 460,
+        "wires": [
+            [
+                "c531f8f3.67e0d8"
+            ]
+        ]
     }
 ]
