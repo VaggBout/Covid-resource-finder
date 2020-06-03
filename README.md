@@ -10,5 +10,6 @@
 4. `npm install amqplib`
 5. `npm install`
 6. `node-red`
-7. Open [http://localhost:1880](http://localhost:1880)
-8. Import [node-red flows](https://nodered.org/docs/user-guide/editor/workspace/import-export)
+7. Edit .node-red/settings.js and add `amqplib:require('amqplib')` inside `functionGlobalContext`
+8. Open [http://localhost:1880](http://localhost:1880)
+9. Import [node-red flows](https://nodered.org/docs/user-guide/editor/workspace/import-export)
