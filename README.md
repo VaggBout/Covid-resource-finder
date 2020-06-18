@@ -6,7 +6,7 @@
 
 1. Install [Node.js](https://github.com/nodejs/node#download) server
 2. Install and configure [RabbitMQ Server](https://www.rabbitmq.com/download.html)
-3. Install node-red `sudo npm install -g --unsafe-perm node-red`
+3. Install [node-red](https://nodered.org/docs/getting-started/)
 4. `npm install amqplib`
 5. `npm install`
 6. `node-red`
