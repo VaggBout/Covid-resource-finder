@@ -1,6 +1,7 @@
 # COVID Resource finder
 
 ### A cloud-based REST platform for real-time health resources availability registering, discovering and matching in pandemic crisis conditions based on node-red
+Platform presentation: https://www.youtube.com/watch?v=V4DcCNEdYVA&t
 
 ## Install locally
 
